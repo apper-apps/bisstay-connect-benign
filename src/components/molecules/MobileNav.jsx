@@ -5,12 +5,12 @@ import ApperIcon from '@/components/ApperIcon';
 const MobileNav = ({ isOpen, onClose }) => {
   const location = useLocation();
 
-  const navItems = [
-    { name: 'Browse Properties', path: '/browse', icon: 'Search' },
-    { name: 'Owner Dashboard', path: '/owner-dashboard', icon: 'Home' },
-    { name: 'Company Dashboard', path: '/company-dashboard', icon: 'Building2' },
-    { name: 'Messages', path: '/messages', icon: 'MessageCircle' },
-    { name: 'How It Works', path: '/how-it-works', icon: 'HelpCircle' },
+const navItems = [
+    { name: 'Bläddra fastigheter', path: '/browse', icon: 'Search' },
+    { name: 'Ägare instrumentpanel', path: '/owner-dashboard', icon: 'Home' },
+    { name: 'Företag instrumentpanel', path: '/company-dashboard', icon: 'Building2' },
+    { name: 'Meddelanden', path: '/messages', icon: 'MessageCircle' },
+    { name: 'Så fungerar det', path: '/how-it-works', icon: 'HelpCircle' },
   ];
 
   return (
@@ -33,7 +33,7 @@ const MobileNav = ({ isOpen, onClose }) => {
             className="fixed top-0 right-0 bottom-0 z-50 w-80 bg-white shadow-xl"
           >
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">Navigation</h2>
+<h2 className="text-lg font-semibold text-gray-900">Navigering</h2>
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100"
@@ -66,7 +66,7 @@ const MobileNav = ({ isOpen, onClose }) => {
                   className="btn-primary w-full flex items-center justify-center space-x-2"
                 >
                   <ApperIcon name="Plus" className="h-4 w-4" />
-                  <span>List Property</span>
+<span>Lista fastighet</span>
                 </Link>
               </div>
             </nav>

@@ -38,12 +38,12 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* Location */}
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+<label className="block text-sm font-medium text-gray-700 mb-2">Plats</label>
           <div className="relative">
             <ApperIcon name="MapPin" className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <input
               type="text"
-              placeholder="City or area"
+placeholder="Stad eller område"
               value={searchFilters.location}
               onChange={(e) => handleInputChange('location', e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -53,7 +53,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
 
         {/* Check-in */}
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Check-in</label>
+<label className="block text-sm font-medium text-gray-700 mb-2">Incheckning</label>
           <div className="relative">
             <ApperIcon name="Calendar" className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <input
@@ -67,7 +67,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
 
         {/* Check-out */}
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Check-out</label>
+<label className="block text-sm font-medium text-gray-700 mb-2">Utcheckning</label>
           <div className="relative">
             <ApperIcon name="Calendar" className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <input
@@ -81,7 +81,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
 
         {/* Guests */}
         <div className="relative" ref={guestRef}>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Workers</label>
+<label className="block text-sm font-medium text-gray-700 mb-2">Arbetare</label>
           <button
             type="button"
             onClick={() => setShowGuestSelector(!showGuestSelector)}
@@ -89,7 +89,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
           >
             <div className="flex items-center space-x-2">
               <ApperIcon name="Users" className="h-5 w-5 text-gray-400" />
-              <span className="text-gray-700">{searchFilters.guests} worker{searchFilters.guests > 1 ? 's' : ''}</span>
+<span className="text-gray-700">{searchFilters.guests} arbetare</span>
             </div>
             <ApperIcon name="ChevronDown" className="h-4 w-4 text-gray-400" />
           </button>
@@ -97,7 +97,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
           {showGuestSelector && (
             <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">Workers</span>
+<span className="text-sm font-medium text-gray-700">Arbetare</span>
                 <div className="flex items-center space-x-3">
                   <button
                     type="button"
@@ -128,7 +128,7 @@ const SearchBar = ({ searchFilters, onSearchChange, onSearch }) => {
           className="btn-primary flex items-center space-x-2 px-8 py-3"
         >
           <ApperIcon name="Search" className="h-5 w-5" />
-          <span>Search Properties</span>
+<span>Sök fastigheter</span>
         </button>
       </div>
     </form>

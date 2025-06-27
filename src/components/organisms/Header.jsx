@@ -8,11 +8,11 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const navigate = useNavigate();
   const [currentRole, setCurrentRole] = useState('company');
 
-  const navItems = [
-    { name: 'Browse Properties', path: '/browse', icon: 'Search' },
-    { name: 'My Dashboard', path: currentRole === 'owner' ? '/owner-dashboard' : '/company-dashboard', icon: 'LayoutDashboard' },
-    { name: 'Messages', path: '/messages', icon: 'MessageCircle' },
-    { name: 'How It Works', path: '/how-it-works', icon: 'HelpCircle' },
+const navItems = [
+    { name: 'Bläddra fastigheter', path: '/browse', icon: 'Search' },
+    { name: 'Min instrumentpanel', path: currentRole === 'owner' ? '/owner-dashboard' : '/company-dashboard', icon: 'LayoutDashboard' },
+    { name: 'Meddelanden', path: '/messages', icon: 'MessageCircle' },
+    { name: 'Så fungerar det', path: '/how-it-works', icon: 'HelpCircle' },
   ];
 
   const handleRoleChange = (role) => {
@@ -31,7 +31,7 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-amber-500 rounded-lg flex items-center justify-center">
               <ApperIcon name="Building2" className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold gradient-text">BizStay Connect</span>
+<span className="text-xl font-bold gradient-text">Stay on Site</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,7 +60,7 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
               className="btn-primary flex items-center space-x-2"
             >
               <ApperIcon name="Plus" className="h-4 w-4" />
-              <span>List Property</span>
+<span>Lista fastighet</span>
             </Link>
           </div>
 

@@ -86,15 +86,15 @@ const PropertyDetailPage = () => {
           <div className="p-8 border-b border-gray-200">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
               <div className="mb-4 lg:mb-0">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{property.title}</h1>
+<h1 className="text-3xl font-bold text-gray-900 mb-2">{property.title}</h1>
                 <div className="flex items-center text-gray-600 mb-2">
                   <ApperIcon name="MapPin" className="h-5 w-5 mr-2" />
                   <span>{property.address}</span>
                 </div>
                 <div className="flex items-center space-x-6 text-sm text-gray-600">
                   <div className="flex items-center">
-                    <ApperIcon name="Users" className="h-4 w-4 mr-1" />
-                    <span>Up to {property.capacity} workers</span>
+<ApperIcon name="Users" className="h-4 w-4 mr-1" />
+                    <span>Upp till {property.capacity} arbetare</span>
                   </div>
                   <div className="flex items-center">
                     <ApperIcon name="Home" className="h-4 w-4 mr-1" />
@@ -104,8 +104,8 @@ const PropertyDetailPage = () => {
               </div>
               
               <div className="text-right">
-                <div className="text-3xl font-bold text-primary-600">${property.price}</div>
-                <div className="text-gray-500">per night</div>
+<div className="text-3xl font-bold text-primary-600">{property.price} kr</div>
+                <div className="text-gray-500">per natt</div>
               </div>
             </div>
           </div>
@@ -118,13 +118,13 @@ const PropertyDetailPage = () => {
 
               {/* Description */}
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">About this property</h2>
+<h2 className="text-2xl font-semibold text-gray-900 mb-4">Om denna fastighet</h2>
                 <p className="text-gray-600 leading-relaxed">{property.description}</p>
               </div>
 
               {/* Amenities */}
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Amenities</h2>
+<h2 className="text-2xl font-semibold text-gray-900 mb-6">Bekvämligheter</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {property.amenities.map((amenity, index) => (
                     <div
@@ -142,10 +142,10 @@ const PropertyDetailPage = () => {
 
               {/* Location */}
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Location</h2>
+<h2 className="text-2xl font-semibold text-gray-900 mb-4">Plats</h2>
                 <div className="bg-gray-100 rounded-lg p-8 text-center">
                   <ApperIcon name="MapPin" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Interactive map coming soon</p>
+<p className="text-gray-600">Interaktiv karta kommer snart</p>
                   <p className="text-sm text-gray-500 mt-2">{property.address}</p>
                 </div>
               </div>

@@ -13,10 +13,10 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
   };
 
   const getStatusText = (status) => {
-    switch (status) {
-      case 'available': return 'Available';
-      case 'booked': return 'Booked';
-      case 'pending': return 'Pending';
+switch (status) {
+      case 'available': return 'Tillgänglig';
+      case 'booked': return 'Bokad';
+      case 'pending': return 'Väntande';
       default: return status;
     }
   };
@@ -50,14 +50,14 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
                   <span className="text-sm">{property.address}</span>
                 </div>
                 <div className="flex items-center text-gray-600">
-                  <ApperIcon name="Users" className="h-4 w-4 mr-1" />
-                  <span className="text-sm">Up to {property.capacity} workers</span>
+<ApperIcon name="Users" className="h-4 w-4 mr-1" />
+                  <span className="text-sm">Upp till {property.capacity} arbetare</span>
                 </div>
               </div>
               
               <div className="text-right">
-                <div className="text-2xl font-bold text-primary-600">${property.price}</div>
-                <div className="text-sm text-gray-500">per night</div>
+<div className="text-2xl font-bold text-primary-600">{property.price} kr</div>
+                <div className="text-sm text-gray-500">per natt</div>
               </div>
             </div>
 
@@ -88,10 +88,10 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
               </div>
               
               <Link
-                to={`/property/${property.Id}`}
+to={`/property/${property.Id}`}
                 className="btn-primary"
               >
-                View Details
+                Visa detaljer
               </Link>
             </div>
           </div>
@@ -127,8 +127,8 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-lg font-semibold text-gray-900">{property.title}</h3>
           <div className="text-right">
-            <div className="text-xl font-bold text-primary-600">${property.price}</div>
-            <div className="text-xs text-gray-500">per night</div>
+<div className="text-xl font-bold text-primary-600">{property.price} kr</div>
+            <div className="text-xs text-gray-500">per natt</div>
           </div>
         </div>
         
@@ -138,8 +138,8 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
         </div>
         
         <div className="flex items-center text-gray-600 mb-4">
-          <ApperIcon name="Users" className="h-4 w-4 mr-1" />
-          <span className="text-sm">Up to {property.capacity} workers</span>
+<ApperIcon name="Users" className="h-4 w-4 mr-1" />
+          <span className="text-sm">Upp till {property.capacity} arbetare</span>
         </div>
 
         <div className="flex flex-wrap gap-1 mb-4">
@@ -165,10 +165,10 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
           </div>
           
           <Link
-            to={`/property/${property.Id}`}
+to={`/property/${property.Id}`}
             className="btn-primary text-sm px-4 py-2"
           >
-            View Details
+            Visa detaljer
           </Link>
         </div>
       </div>

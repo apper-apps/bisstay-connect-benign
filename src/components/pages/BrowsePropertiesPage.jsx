@@ -120,11 +120,11 @@ const BrowsePropertiesPage = () => {
         {/* Results Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
           <div className="mb-4 sm:mb-0">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Available Properties
+<h1 className="text-2xl font-bold text-gray-900">
+              Tillgängliga fastigheter
             </h1>
             <p className="text-gray-600">
-              {filteredProperties.length} propertie{filteredProperties.length !== 1 ? 's' : ''} found
+              {filteredProperties.length} fastighet{filteredProperties.length !== 1 ? 'er' : ''} hittade
             </p>
           </div>
 
@@ -133,8 +133,8 @@ const BrowsePropertiesPage = () => {
               onClick={() => setShowFilters(!showFilters)}
               className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              <ApperIcon name="Filter" className="h-4 w-4" />
-              <span>Filters</span>
+<ApperIcon name="Filter" className="h-4 w-4" />
+              <span>Filter</span>
             </button>
 
             <div className="flex items-center space-x-2 bg-white border border-gray-300 rounded-lg p-1">
@@ -168,10 +168,10 @@ const BrowsePropertiesPage = () => {
           <div className="flex-1">
             {filteredProperties.length === 0 ? (
               <Empty
-                icon="Home"
-                title="No properties found"
-                description="Try adjusting your search criteria or filters to find more properties."
-                actionText="Clear Filters"
+icon="Home"
+                title="Inga fastigheter hittades"
+                description="Försök justera dina sökkriterier eller filter för att hitta fler fastigheter."
+actionText="Rensa filter"
                 onAction={() => {
                   setFilters({
                     priceRange: [0, 5000],

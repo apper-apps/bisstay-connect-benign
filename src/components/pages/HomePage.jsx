@@ -23,46 +23,46 @@ const HomePage = () => {
     navigate(`/browse?${params.toString()}`);
   };
 
-  const features = [
+const features = [
     {
       icon: 'Search',
-      title: 'Find Perfect Housing',
-      description: 'Search and filter properties by location, capacity, amenities, and budget to find ideal worker accommodations.'
+      title: 'Hitta perfekt boende',
+      description: 'Sök och filtrera fastigheter efter plats, kapacitet, bekvämligheter och budget för att hitta idealiska arbetarboenden.'
     },
     {
       icon: 'Shield',
-      title: 'Verified Properties',
-      description: 'All properties are verified and meet safety standards for construction worker housing requirements.'
+      title: 'Verifierade fastigheter',
+      description: 'Alla fastigheter är verifierade och uppfyller säkerhetsstandarder för byggarbetarbostäder.'
     },
     {
       icon: 'Calendar',
-      title: 'Flexible Booking',
-      description: 'Book for short-term projects or long-term contracts with easy date management and availability tracking.'
+      title: 'Flexibel bokning',
+      description: 'Boka för kortsiktiga projekt eller långsiktiga kontrakt med enkel datumhantering och tillgänglighetsspårning.'
     },
     {
       icon: 'MessageCircle',
-      title: 'Direct Communication',
-      description: 'Connect directly with property owners to discuss specific needs, group bookings, and special arrangements.'
+      title: 'Direkt kommunikation',
+      description: 'Kommunicera direkt med fastighetsägare för att diskutera specifika behov, gruppbokningar och särskilda arrangemang.'
     }
   ];
 
-  const steps = [
+const steps = [
     {
       step: '01',
-      title: 'Choose Your Role',
-      description: 'Select whether you\'re a construction company looking for housing or a property owner wanting to list your space.',
+      title: 'Välj din roll',
+      description: 'Välj om du är ett byggföretag som söker boende eller en fastighetsägare som vill lista din fastighet.',
       icon: 'UserCheck'
     },
     {
       step: '02',
-      title: 'Search or List',
-      description: 'Companies can search for suitable properties while owners can create detailed listings with photos and amenities.',
+      title: 'Sök eller lista',
+      description: 'Företag kan söka efter lämpliga fastigheter medan ägare kan skapa detaljerade listor med foton och bekvämligheter.',
       icon: 'Search'
     },
     {
       step: '03',
-      title: 'Connect & Book',
-      description: 'Send booking requests, communicate directly, and finalize arrangements that work for both parties.',
+      title: 'Anslut och boka',
+      description: 'Skicka bokningsförfrågningar, kommunicera direkt och slutför arrangemang som fungerar för båda parter.',
       icon: 'Handshake'
     }
   ];
@@ -79,9 +79,9 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
-            >
-              Construction Worker Housing
-              <span className="block gradient-text">Made Simple</span>
+>
+              Byggarbetarboenden
+              <span className="block gradient-text">Enkelt gjort</span>
             </motion.h1>
             
             <motion.p
@@ -90,8 +90,8 @@ const HomePage = () => {
               transition={{ delay: 0.2 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
             >
-              Connect property owners with construction companies. Find quality temporary housing 
-              for your workforce or list your properties for reliable rental income.
+              Koppla samman fastighetsägare med byggföretag. Hitta kvalitetsboenden för tillfällig 
+              inkvartering av din arbetsstyrka eller lista dina fastigheter för pålitlig hyresintäkt.
             </motion.p>
           </div>
 
@@ -116,13 +116,13 @@ const HomePage = () => {
             transition={{ delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
           >
-            <Link to="/browse" className="btn-primary flex items-center space-x-2">
+<Link to="/browse" className="btn-primary flex items-center space-x-2">
               <ApperIcon name="Search" className="h-5 w-5" />
-              <span>Browse Properties</span>
+              <span>Bläddra fastigheter</span>
             </Link>
             <Link to="/create-listing" className="btn-secondary flex items-center space-x-2">
               <ApperIcon name="Plus" className="h-5 w-5" />
-              <span>List Your Property</span>
+              <span>Lista din fastighet</span>
             </Link>
           </motion.div>
         </div>
@@ -132,11 +132,11 @@ const HomePage = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose BizStay Connect?
+<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Varför välja Stay on Site?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Streamlined platform designed specifically for construction industry housing needs
+              Strömlinjeformad plattform designad specifikt för byggindustrins bostadsbehov
             </p>
           </div>
 
@@ -165,11 +165,11 @@ const HomePage = () => {
       <section className="py-20 bg-gradient-to-br from-gray-50 to-primary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              How It Works
+<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Så fungerar det
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get started in three simple steps
+              Kom igång i tre enkla steg
             </p>
           </div>
 
@@ -211,24 +211,24 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Get Started?
+<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Redo att komma igång?
             </h2>
             <p className="text-xl text-primary-100 mb-8">
-              Join thousands of construction companies and property owners already using BizStay Connect
+              Gå med tusentals byggföretag och fastighetsägare som redan använder Stay on Site
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 to="/browse" 
                 className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
               >
-                Find Housing Now
+                Hitta boende nu
               </Link>
               <Link 
                 to="/create-listing" 
                 className="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg"
               >
-                List Your Property
+                Lista din fastighet
               </Link>
             </div>
           </motion.div>
