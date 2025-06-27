@@ -25,7 +25,7 @@ const HomePage = () => {
 
 const features = [
     {
-      icon: 'Search',
+      icon: 'MapPin',
       title: 'Hitta perfekt boende',
       description: 'Sök och filtrera fastigheter efter plats, kapacitet, bekvämligheter och budget för att hitta idealiska arbetarboenden.'
     },
@@ -34,8 +34,8 @@ const features = [
       title: 'Verifierade fastigheter',
       description: 'Alla fastigheter är verifierade och uppfyller säkerhetsstandarder för byggarbetarbostäder.'
     },
-    {
-      icon: 'Calendar',
+{
+      icon: 'Users',
       title: 'Flexibel bokning',
       description: 'Boka för kortsiktiga projekt eller långsiktiga kontrakt med enkel datumhantering och tillgänglighetsspårning.'
     },

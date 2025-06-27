@@ -5,9 +5,9 @@ const RoleSelector = ({ currentRole, onRoleChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const roles = [
-    { id: 'company', name: 'Construction Company', icon: 'Building2' },
-    { id: 'owner', name: 'Property Owner', icon: 'Home' },
+const roles = [
+    { id: 'company', name: 'Byggföretag', icon: 'Building2' },
+    { id: 'owner', name: 'Fastighetsägare', icon: 'Home' },
   ];
 
   const currentRoleData = roles.find(role => role.id === currentRole);
