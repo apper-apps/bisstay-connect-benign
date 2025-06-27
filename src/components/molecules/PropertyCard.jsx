@@ -89,7 +89,7 @@ switch (status) {
               
               <Link
 to={`/property/${property.Id}`}
-                className="btn-primary"
+className="btn-primary"
               >
                 Visa detaljer
               </Link>
@@ -166,7 +166,7 @@ to={`/property/${property.Id}`}
           
           <Link
 to={`/property/${property.Id}`}
-            className="btn-primary text-sm px-4 py-2"
+className="btn-primary text-sm px-4 py-2"
           >
             Visa detaljer
           </Link>

@@ -4,81 +4,81 @@ import React from "react";
 import ApperIcon from "@/components/ApperIcon";
 
 const HowItWorksPage = () => {
-  const forCompanies = [
+const forCompanies = [
     {
       step: 1,
-      title: 'Search Properties',
-      description: 'Browse available properties by location, dates, and capacity. Use filters to find exactly what you need.',
+      title: 'Sök fastigheter',
+      description: 'Bläddra bland tillgängliga fastigheter efter plats, datum och kapacitet. Använd filter för att hitta exakt vad du behöver.',
       icon: 'Search'
     },
     {
       step: 2,
-      title: 'View Details',
-      description: 'Check property details, photos, amenities, and pricing. See exactly what\'s included and available.',
+      title: 'Visa detaljer',
+      description: 'Kontrollera fastighetsdetaljer, foton, bekvämligheter och priser. Se exakt vad som ingår och är tillgängligt.',
       icon: 'Eye'
     },
     {
       step: 3,
-      title: 'Request Booking',
-      description: 'Submit a booking request with your dates, number of workers, and project details.',
+      title: 'Begär bokning',
+      description: 'Skicka en bokningsförfrågan med dina datum, antal arbetare och projektdetaljer.',
       icon: 'Calendar'
     },
     {
       step: 4,
-      title: 'Get Confirmed',
-      description: 'Property owners will review and respond to your request. Once confirmed, you\'re all set!',
+      title: 'Få bekräftelse',
+      description: 'Fastighetsägare kommer att granska och svara på din förfrågan. När den är bekräftad är du klar!',
       icon: 'CheckCircle'
     }
   ];
 
-  const forOwners = [
+const forOwners = [
     {
       step: 1,
-      title: 'List Your Property',
-      description: 'Create a detailed listing with photos, amenities, pricing, and availability.',
+      title: 'Lista din fastighet',
+      description: 'Skapa en detaljerad listning med foton, bekvämligheter, priser och tillgänglighet.',
       icon: 'Home'
     },
     {
       step: 2,
-      title: 'Receive Requests',
-      description: 'Construction companies will send booking requests with their project details and requirements.',
+      title: 'Ta emot förfrågningar',
+      description: 'Byggföretag kommer att skicka bokningsförfrågningar med sina projektdetaljer och krav.',
       icon: 'Mail'
     },
     {
       step: 3,
-      title: 'Review & Accept',
-      description: 'Review booking requests and accept the ones that work for you and your property.',
+      title: 'Granska och acceptera',
+      description: 'Granska bokningsförfrågningar och acceptera de som fungerar för dig och din fastighet.',
       icon: 'UserCheck'
     },
     {
       step: 4,
-      title: 'Earn Income',
-      description: 'Host construction workers and earn consistent rental income from your property.',
+      title: 'Tjäna inkomst',
+      description: 'Var värd för byggarbetare och tjäna konsekvent hyresintäkt från din fastighet.',
       icon: 'DollarSign'
     }
   ];
 
-  const benefits = [
+const benefits = [
     {
-      title: 'For Construction Companies',
+      title: 'För byggföretag',
       items: [
-        'Find quality housing for your workforce',
-        'Book short-term or long-term stays',
-        'Direct communication with property owners',
-        'Flexible booking terms',
-        'Verified property listings'
+        'Hitta kvalitetsboenden för din arbetsstyrka',
+        'Boka kortsiktiga eller långsiktiga vistelser',
+        'Direkt kommunikation med fastighetsägare',
+        'Flexibla bokningsvillkor',
+        'Verifierade fastighetslistor'
       ],
       icon: 'Building2',
       color: 'bg-blue-500'
     },
     {
-      title: 'For Property Owners',
+      title: 'För fastighetsägare',
       items: [
-        'Consistent rental income',
-        'Reliable construction company tenants',
-        'Flexible listing management',
-        'Direct booking requests',
-        'Professional business relationships'
+        'Konsekvent hyresintäkt',
+        'Pålitliga byggföretag som hyresgäster',
+        'Flexibel listhantering',
+        'Direkta bokningsförfrågningar',
+        'Professionella affärsrelationer'
       ],
       icon: 'Home',
       color: 'bg-emerald-500'
@@ -118,9 +118,9 @@ const HowItWorksPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-semibold mb-6">How BizStay Connect Works</h1>
+<h1 className="text-4xl md:text-5xl font-semibold mb-6">Så fungerar Stay on Site</h1>
             <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
-              Connecting construction companies with property owners for temporary worker housing
+              Kopplar samman byggföretag med fastighetsägare för tillfälliga arbetarbostäder
             </p>
           </motion.div>
         </div>
@@ -129,9 +129,9 @@ const HowItWorksPage = () => {
       {/* For Companies */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">For Construction Companies</h2>
-            <p className="text-lg text-gray-600">Find and book quality housing for your workforce in 4 simple steps</p>
+<div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">För byggföretag</h2>
+            <p className="text-lg text-gray-600">Hitta och boka kvalitetsboenden för din arbetsstyrka i 4 enkla steg</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -154,9 +154,9 @@ const HowItWorksPage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+<div className="text-center mt-12">
             <Link to="/browse" className="btn-primary">
-              Start Browsing Properties
+              Börja bläddra fastigheter
             </Link>
           </div>
         </div>
@@ -164,10 +164,10 @@ const HowItWorksPage = () => {
 
       {/* For Property Owners */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">For Property Owners</h2>
-            <p className="text-lg text-gray-600">List your property and start earning income in 4 simple steps</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">För fastighetsägare</h2>
+            <p className="text-lg text-gray-600">Lista din fastighet och börja tjäna inkomst i 4 enkla steg</p>
           </div>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -190,9 +190,9 @@ const HowItWorksPage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+<div className="text-center mt-12">
             <Link to="/create-listing" className="btn-primary">
-              List Your Property
+              Lista din fastighet
             </Link>
           </div>
         </div>
@@ -201,9 +201,9 @@ const HowItWorksPage = () => {
       {/* Benefits */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose BizStay Connect?</h2>
-            <p className="text-lg text-gray-600">Benefits for both property owners and construction companies</p>
+<div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Varför välja Stay on Site?</h2>
+            <p className="text-lg text-gray-600">Fördelar för både fastighetsägare och byggföretag</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -238,9 +238,9 @@ const HowItWorksPage = () => {
       {/* FAQ */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-gray-600">Get answers to common questions about BizStay Connect</p>
+<div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vanliga frågor</h2>
+            <p className="text-lg text-gray-600">Få svar på vanliga frågor om Stay on Site</p>
           </div>
 
           <div className="space-y-6">
@@ -269,16 +269,16 @@ const HowItWorksPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold text-white mb-6">Ready to Get Started?</h2>
+<h2 className="text-3xl font-bold text-white mb-6">Redo att komma igång?</h2>
             <p className="text-xl text-primary-100 mb-8">
-              Join BizStay Connect today and solve your construction housing needs
+              Gå med Stay on Site idag och lös dina byggbostadsbehov
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/browse" className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
-                Find Housing
+<Link to="/browse" className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                Hitta boende
               </Link>
               <Link to="/create-listing" className="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors">
-                List Property
+                Lista fastighet
               </Link>
             </div>
           </motion.div>

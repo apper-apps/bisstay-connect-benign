@@ -49,10 +49,10 @@ const CompanyDashboardPage = () => {
     monthlySpend: bookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + b.totalPrice, 0)
   };
 
-  const tabs = [
-    { id: 'overview', name: 'Overview', icon: 'BarChart3' },
-    { id: 'bookings', name: 'My Bookings', icon: 'Calendar' },
-    { id: 'saved', name: 'Saved Properties', icon: 'Heart' },
+const tabs = [
+    { id: 'overview', name: 'Översikt', icon: 'BarChart3' },
+    { id: 'bookings', name: 'Mina bokningar', icon: 'Calendar' },
+    { id: 'saved', name: 'Sparade fastigheter', icon: 'Heart' },
   ];
 
 return (
@@ -61,15 +61,15 @@ return (
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
           <div>
-            <h1 className="text-3xl font-semibold text-neutral-900">Company Dashboard</h1>
-            <p className="text-neutral-600 mt-2 text-sm">Manage your worker accommodations</p>
+<h1 className="text-3xl font-semibold text-neutral-900">Företagsinstrumentpanel</h1>
+            <p className="text-neutral-600 mt-2 text-sm">Hantera dina arbetarbostäder</p>
           </div>
           <Link
             to="/browse"
             className="btn-primary flex items-center space-x-2 mt-6 sm:mt-0"
           >
             <ApperIcon name="Search" className="h-4 w-4" />
-            <span>Find Housing</span>
+            <span>Hitta boende</span>
           </Link>
         </div>
 
@@ -106,7 +106,7 @@ return (
               
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Recent Bookings</h3>
+                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Senaste bokningar</h3>
                   {bookings.slice(0, 5).map((booking) => {
                     const property = properties.find(p => p.Id === booking.propertyId);
                     return (
@@ -139,8 +139,8 @@ return (
                   })}
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Upcoming Check-ins</h3>
+<div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
+                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Kommande incheckningar</h3>
                   {bookings.filter(b => b.status === 'confirmed').slice(0, 5).map((booking) => {
                     const property = properties.find(p => p.Id === booking.propertyId);
                     return (
@@ -151,12 +151,12 @@ return (
                           </div>
                           <div>
                             <div className="font-medium text-neutral-900 text-sm">{property?.title || 'Unknown Property'}</div>
-                            <div className="text-xs text-neutral-500">{booking.guests} workers</div>
+<div className="text-xs text-neutral-500">{booking.guests} arbetare</div>
                           </div>
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-medium text-neutral-900">{booking.startDate}</div>
-                          <div className="text-xs text-neutral-500">Check-in</div>
+                          <div className="text-xs text-neutral-500">Incheckning</div>
                         </div>
                       </div>
                     );

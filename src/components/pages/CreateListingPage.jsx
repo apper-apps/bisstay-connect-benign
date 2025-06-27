@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
-import ApperIcon from '@/components/ApperIcon';
-import { propertyService } from '@/services/api/propertyService';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { propertyService } from "@/services/api/propertyService";
+import ApperIcon from "@/components/ApperIcon";
 
 const CreateListingPage = () => {
   const navigate = useNavigate();
@@ -23,34 +23,34 @@ const CreateListingPage = () => {
     contactPhone: ''
   });
 
-  const steps = [
-    { id: 1, name: 'Basic Info', icon: 'Home' },
-    { id: 2, name: 'Details', icon: 'FileText' },
-    { id: 3, name: 'Amenities', icon: 'Star' },
-    { id: 4, name: 'Photos', icon: 'Camera' },
-    { id: 5, name: 'Contact', icon: 'Phone' }
+const steps = [
+    { id: 1, name: 'Grundinfo', icon: 'Home' },
+    { id: 2, name: 'Detaljer', icon: 'FileText' },
+    { id: 3, name: 'Bekvämligheter', icon: 'Star' },
+    { id: 4, name: 'Foton', icon: 'Camera' },
+    { id: 5, name: 'Kontakt', icon: 'Phone' }
   ];
 
-  const propertyTypes = [
-    { id: 'house', name: 'House', icon: 'Home' },
-    { id: 'apartment', name: 'Apartment', icon: 'Building' },
-    { id: 'dormitory', name: 'Dormitory', icon: 'Building2' },
-    { id: 'trailer', name: 'Trailer', icon: 'Truck' },
+const propertyTypes = [
+    { id: 'house', name: 'Hus', icon: 'Home' },
+    { id: 'apartment', name: 'Lägenhet', icon: 'Building' },
+    { id: 'dormitory', name: 'Sovsal', icon: 'Building2' },
+    { id: 'trailer', name: 'Husvagn', icon: 'Truck' },
   ];
 
-  const amenities = [
+const amenities = [
     { id: 'wifi', name: 'WiFi', icon: 'Wifi' },
-    { id: 'parking', name: 'Parking', icon: 'Car' },
-    { id: 'kitchen', name: 'Kitchen', icon: 'ChefHat' },
-    { id: 'laundry', name: 'Laundry', icon: 'Shirt' },
-    { id: 'ac', name: 'Air Conditioning', icon: 'Snowflake' },
-    { id: 'heating', name: 'Heating', icon: 'Flame' },
-    { id: 'furnished', name: 'Furnished', icon: 'Armchair' },
-    { id: 'utilities', name: 'Utilities Included', icon: 'Zap' },
+    { id: 'parking', name: 'Parkering', icon: 'Car' },
+    { id: 'kitchen', name: 'Kök', icon: 'ChefHat' },
+    { id: 'laundry', name: 'Tvättstuga', icon: 'Shirt' },
+    { id: 'ac', name: 'Luftkonditionering', icon: 'Snowflake' },
+    { id: 'heating', name: 'Uppvärmning', icon: 'Flame' },
+    { id: 'furnished', name: 'Möblerad', icon: 'Armchair' },
+    { id: 'utilities', name: 'Avgifter inkluderade', icon: 'Zap' },
     { id: 'gym', name: 'Gym/Fitness', icon: 'Dumbbell' },
     { id: 'pool', name: 'Pool', icon: 'Waves' },
-    { id: 'security', name: 'Security', icon: 'Shield' },
-    { id: 'cleaning', name: 'Cleaning Service', icon: 'Sparkles' },
+    { id: 'security', name: 'Säkerhet', icon: 'Shield' },
+    { id: 'cleaning', name: 'Städservice', icon: 'Sparkles' },
   ];
 
   const handleInputChange = (field, value) => {
@@ -85,11 +85,11 @@ const CreateListingPage = () => {
         ]
       };
       
-      await propertyService.create(propertyData);
-      toast.success('Property listed successfully!');
+await propertyService.create(propertyData);
+      toast.success('Fastighet listad framgångsrikt!');
       navigate('/owner-dashboard');
-    } catch (error) {
-      toast.error('Failed to create listing. Please try again.');
+} catch (error) {
+      toast.error('Misslyckades att skapa listning. Försök igen.');
     } finally {
       setLoading(false);
     }
@@ -128,9 +128,9 @@ return (
     <div className="min-h-screen bg-neutral-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-semibold text-neutral-900 mb-3">List Your Property</h1>
-          <p className="text-neutral-600 text-sm">Create a listing for construction worker housing</p>
+<div className="text-center mb-12">
+          <h1 className="text-3xl font-semibold text-neutral-900 mb-3">Lista din fastighet</h1>
+          <p className="text-neutral-600 text-sm">Skapa en listning för byggarbetarbostäder</p>
         </div>
 
         {/* Progress Steps */}
@@ -168,35 +168,35 @@ return (
           <form onSubmit={handleSubmit}>
             {/* Step 1: Basic Info */}
             {currentStep === 1 && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Basic Information</h2>
+<div className="space-y-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Grundläggande information</h2>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Property Title</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Fastighetstitel</label>
                   <input
                     type="text"
                     value={formData.title}
-                    onChange={(e) => handleInputChange('title', e.target.value)}
+onChange={(e) => handleInputChange('title', e.target.value)}
                     className="input-field"
-                    placeholder="e.g., Spacious 4-bedroom house for construction workers"
+                    placeholder="t.ex., Rymligt 4-rumshus för byggarbetare"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Address</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Adress</label>
                   <input
                     type="text"
                     value={formData.address}
                     onChange={(e) => handleInputChange('address', e.target.value)}
-                    className="input-field"
-                    placeholder="Full property address"
+className="input-field"
+                    placeholder="Fullständig fastighetsadress"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Price per Night ($)</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Pris per natt (kr)</label>
                   <input
                     type="number"
                     value={formData.price}
@@ -213,23 +213,23 @@ return (
 
             {/* Step 2: Details */}
             {currentStep === 2 && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Property Details</h2>
+<div className="space-y-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Fastighetsdetaljer</h2>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Beskrivning</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
                     rows={4}
-                    className="input-field"
-                    placeholder="Describe your property, its features, and why it's perfect for construction workers..."
+className="input-field"
+                    placeholder="Beskriv din fastighet, dess funktioner och varför den är perfekt för byggarbetare..."
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Property Type</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">Fastighetstyp</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {propertyTypes.map((type) => (
                       <button
@@ -249,8 +249,8 @@ return (
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Maximum Capacity</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">Maximal kapacitet</label>
                   <div className="flex items-center space-x-4">
                     <button
                       type="button"
@@ -266,18 +266,18 @@ return (
                       className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
                     >
                       <ApperIcon name="Plus" className="h-4 w-4" />
-                    </button>
-                    <span className="text-gray-600">workers</span>
+</button>
+                    <span className="text-gray-600">arbetare</span>
                   </div>
                 </div>
               </div>
             )}
 
             {/* Step 3: Amenities */}
-            {currentStep === 3 && (
+{currentStep === 3 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Amenities</h2>
-                <p className="text-gray-600 mb-6">Select all amenities that apply to your property</p>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Bekvämligheter</h2>
+                <p className="text-gray-600 mb-6">Välj alla bekvämligheter som gäller för din fastighet</p>
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {amenities.map((amenity) => (
@@ -304,42 +304,42 @@ return (
             )}
 
             {/* Step 4: Photos */}
-            {currentStep === 4 && (
+{currentStep === 4 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Photos</h2>
-                <p className="text-gray-600 mb-6">Add photos of your property (optional - sample photos will be used if none provided)</p>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Foton</h2>
+                <p className="text-gray-600 mb-6">Lägg till foton av din fastighet (valfritt - exempelfoton kommer att användas om inga tillhandahålls)</p>
                 
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
-                  <ApperIcon name="Camera" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Upload Photos</h3>
-                  <p className="text-gray-600 mb-4">Drag and drop your photos here, or click to browse</p>
+<ApperIcon name="Camera" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">Ladda upp foton</h3>
+                  <p className="text-gray-600 mb-4">Dra och släpp dina foton här, eller klicka för att bläddra</p>
                   <button
                     type="button"
                     className="btn-outline"
                   >
-                    Choose Photos
+                    Välj foton
                   </button>
                 </div>
                 
-                <div className="text-sm text-gray-500">
-                  <p>Tips for great photos:</p>
+<div className="text-sm text-gray-500">
+                  <p>Tips för bra foton:</p>
                   <ul className="list-disc list-inside mt-2 space-y-1">
-                    <li>Take photos in good lighting</li>
-                    <li>Show all rooms and common areas</li>
-                    <li>Include exterior shots</li>
-                    <li>Highlight key amenities</li>
+                    <li>Ta foton i bra belysning</li>
+                    <li>Visa alla rum och gemensamma utrymmen</li>
+                    <li>Inkludera exteriörbilder</li>
+                    <li>Framhäv viktiga bekvämligheter</li>
                   </ul>
                 </div>
               </div>
             )}
 
             {/* Step 5: Contact */}
-            {currentStep === 5 && (
+{currentStep === 5 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Kontaktinformation</h2>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">E-postadress</label>
                   <input
                     type="email"
                     value={formData.contactEmail}
@@ -350,8 +350,8 @@ return (
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+<div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Telefonnummer</label>
                   <input
                     type="tel"
                     value={formData.contactPhone}
@@ -364,9 +364,9 @@ return (
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                   <div className="flex items-start">
                     <ApperIcon name="Info" className="h-5 w-5 text-amber-600 mt-0.5 mr-3" />
-                    <div className="text-sm text-amber-800">
-                      <p className="font-medium mb-1">Review your listing</p>
-                      <p>Please double-check all information before submitting. You can edit your listing after it's published.</p>
+<div className="text-sm text-amber-800">
+                      <p className="font-medium mb-1">Granska din listning</p>
+                      <p>Kontrollera all information innan du skickar in. Du kan redigera din listning efter att den publicerats.</p>
                     </div>
                   </div>
                 </div>
@@ -374,6 +374,7 @@ return (
             )}
 
             {/* Navigation Buttons */}
+{/* Navigation Buttons */}
             <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
               <button
                 type="button"
@@ -381,7 +382,7 @@ return (
                 disabled={currentStep === 1}
                 className="btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Previous
+                Föregående
               </button>
               
               {currentStep < steps.length ? (
@@ -391,7 +392,7 @@ return (
                   disabled={!canProceed()}
                   className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Next
+                  Nästa
                 </button>
               ) : (
                 <button
@@ -402,18 +403,17 @@ return (
                   {loading ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Creating Listing...</span>
+                      <span>Skapar listning...</span>
                     </>
                   ) : (
                     <>
                       <ApperIcon name="Check" className="h-4 w-4" />
-                      <span>Publish Listing</span>
+                      <span>Publicera listning</span>
                     </>
                   )}
                 </button>
               )}
             </div>
-          </form>
         </motion.div>
       </div>
     </div>

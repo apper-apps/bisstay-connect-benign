@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
-import Empty from '@/components/ui/Empty';
-import Loading from '@/components/ui/Loading';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
 
 const MessagesPage = () => {
   const [messages, setMessages] = useState([]);
@@ -22,17 +22,17 @@ const MessagesPage = () => {
 return (
     <div className="min-h-screen bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <h1 className="text-3xl font-semibold text-neutral-900">Messages</h1>
-          <p className="text-neutral-600 mt-2 text-sm">Communicate with property owners and construction companies</p>
+<div className="mb-12">
+          <h1 className="text-3xl font-semibold text-neutral-900">Meddelanden</h1>
+          <p className="text-neutral-600 mt-2 text-sm">Kommunicera med fastighetsägare och byggföretag</p>
         </div>
 
         {messages.length === 0 ? (
           <div className="bg-white rounded-xl shadow-card p-12 border border-neutral-200">
-            <Empty
+<Empty
               icon="MessageCircle"
-              title="No Messages Yet"
-              description="When you start booking properties or receive booking requests, your conversations will appear here."
+              title="Inga meddelanden än"
+              description="När du börjar boka fastigheter eller ta emot bokningsförfrågningar kommer dina konversationer att visas här."
             />
           </div>
         ) : (
@@ -40,8 +40,8 @@ return (
             <div className="grid grid-cols-1 lg:grid-cols-3 h-[600px]">
               {/* Message List */}
               <div className="lg:col-span-1 border-r border-gray-200">
-                <div className="p-4 border-b border-gray-200">
-                  <h2 className="text-lg font-semibold text-gray-900">Conversations</h2>
+<div className="p-4 border-b border-gray-200">
+                  <h2 className="text-lg font-semibold text-gray-900">Konversationer</h2>
                 </div>
                 <div className="overflow-y-auto h-full">
                   {messages.map((message) => (
@@ -80,11 +80,11 @@ return (
                     <div className="flex-1 p-4 overflow-y-auto">
                       {/* Messages would go here */}
                     </div>
-                    <div className="p-4 border-t border-gray-200">
+<div className="p-4 border-t border-gray-200">
                       <div className="flex space-x-3">
                         <input
                           type="text"
-                          placeholder="Type your message..."
+                          placeholder="Skriv ditt meddelande..."
                           className="flex-1 input-field"
                         />
                         <button className="btn-primary">
@@ -96,8 +96,8 @@ return (
                 ) : (
                   <div className="h-full flex items-center justify-center text-gray-500">
                     <div className="text-center">
-                      <ApperIcon name="MessageCircle" className="h-12 w-12 mx-auto mb-4" />
-                      <p>Select a conversation to start messaging</p>
+<ApperIcon name="MessageCircle" className="h-12 w-12 mx-auto mb-4" />
+                      <p>Välj en konversation för att börja skicka meddelanden</p>
                     </div>
                   </div>
                 )}

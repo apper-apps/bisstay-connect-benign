@@ -6,11 +6,11 @@ import Empty from '@/components/ui/Empty';
 const PropertyManagement = ({ properties, onDelete }) => {
   if (properties.length === 0) {
     return (
-      <Empty
+<Empty
         icon="Home"
-        title="No Properties Listed"
-        description="Start earning by listing your first property for construction workers."
-        actionText="Create First Listing"
+        title="Inga fastigheter listade"
+        description="Börja tjäna genom att lista din första fastighet för byggarbetare."
+        actionText="Skapa första listning"
         onAction={() => window.location.href = '/create-listing'}
       />
     );
@@ -34,8 +34,8 @@ const PropertyManagement = ({ properties, onDelete }) => {
                 className="w-full h-48 object-cover"
               />
               <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-full">
-                  Available
+<span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-full">
+                  Tillgänglig
                 </span>
               </div>
               <div className="absolute top-4 right-4">
@@ -59,9 +59,9 @@ const PropertyManagement = ({ properties, onDelete }) => {
             <div className="p-6">
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{property.title}</h3>
-                <div className="text-right">
-                  <div className="text-xl font-bold text-primary-600">${property.price}</div>
-                  <div className="text-xs text-gray-500">per night</div>
+<div className="text-right">
+                  <div className="text-xl font-bold text-primary-600">{property.price} kr</div>
+                  <div className="text-xs text-gray-500">per natt</div>
                 </div>
               </div>
               
@@ -71,24 +71,24 @@ const PropertyManagement = ({ properties, onDelete }) => {
               </div>
               
               <div className="flex items-center text-gray-600 mb-4">
-                <ApperIcon name="Users" className="h-4 w-4 mr-1" />
-                <span className="text-sm">Up to {property.capacity} workers</span>
+<ApperIcon name="Users" className="h-4 w-4 mr-1" />
+                <span className="text-sm">Upp till {property.capacity} arbetare</span>
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <div className="flex items-center">
-                    <ApperIcon name="Eye" className="h-4 w-4 mr-1" />
-                    <span>12 views</span>
+<ApperIcon name="Eye" className="h-4 w-4 mr-1" />
+                    <span>12 visningar</span>
                   </div>
                   <div className="flex items-center">
-                    <ApperIcon name="Heart" className="h-4 w-4 mr-1" />
-                    <span>3 saved</span>
+<ApperIcon name="Heart" className="h-4 w-4 mr-1" />
+                    <span>3 sparade</span>
                   </div>
                 </div>
                 
-                <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Edit Listing
+<button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                  Redigera listning
                 </button>
               </div>
             </div>

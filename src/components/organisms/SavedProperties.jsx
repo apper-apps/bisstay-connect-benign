@@ -5,11 +5,11 @@ import Empty from '@/components/ui/Empty';
 const SavedProperties = ({ properties }) => {
   if (properties.length === 0) {
     return (
-      <Empty
+<Empty
         icon="Heart"
-        title="No Saved Properties"
-        description="Save properties you're interested in to easily find them later."
-        actionText="Browse Properties"
+        title="Inga sparade fastigheter"
+        description="Spara fastigheter du är intresserad av för att enkelt hitta dem senare."
+        actionText="Bläddra fastigheter"
         onAction={() => window.location.href = '/browse'}
       />
     );
@@ -17,9 +17,9 @@ const SavedProperties = ({ properties }) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-gray-900">Saved Properties</h2>
-        <span className="text-sm text-gray-500">{properties.length} properties saved</span>
+<div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-gray-900">Sparade fastigheter</h2>
+        <span className="text-sm text-gray-500">{properties.length} fastigheter sparade</span>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

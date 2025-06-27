@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
-import ApperIcon from '@/components/ApperIcon';
-import ImageCarousel from '@/components/molecules/ImageCarousel';
-import BookingWidget from '@/components/molecules/BookingWidget';
-import Loading from '@/components/ui/Loading';
-import Error from '@/components/ui/Error';
-import { propertyService } from '@/services/api/propertyService';
-import { bookingService } from '@/services/api/bookingService';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { propertyService } from "@/services/api/propertyService";
+import { bookingService } from "@/services/api/bookingService";
+import ApperIcon from "@/components/ApperIcon";
+import BookingWidget from "@/components/molecules/BookingWidget";
+import ImageCarousel from "@/components/molecules/ImageCarousel";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 
 const PropertyDetailPage = () => {
   const { id } = useParams();
@@ -34,7 +34,7 @@ const PropertyDetailPage = () => {
     loadProperty();
   }, [id]);
 
-  const handleBookingRequest = async (bookingData) => {
+const handleBookingRequest = async (bookingData) => {
     try {
       setBookingLoading(true);
       await bookingService.create({
@@ -42,9 +42,9 @@ const PropertyDetailPage = () => {
         propertyId: property.Id,
         status: 'pending'
       });
-      toast.success('Booking request sent successfully! The property owner will contact you soon.');
+      toast.success('Bokningsförfrågan skickad! Fastighetsägaren kommer att kontakta dig snart.');
     } catch (err) {
-      toast.error('Failed to send booking request. Please try again.');
+      toast.error('Misslyckades att skicka bokningsförfrågan. Försök igen.');
     } finally {
       setBookingLoading(false);
     }

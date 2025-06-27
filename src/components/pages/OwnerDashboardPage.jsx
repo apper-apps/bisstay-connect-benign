@@ -75,27 +75,27 @@ const OwnerDashboardPage = () => {
     occupancyRate: properties.length > 0 ? Math.round((bookings.filter(b => b.status === 'confirmed').length / properties.length) * 100) : 0
   };
 
-  const tabs = [
-    { id: 'overview', name: 'Overview', icon: 'BarChart3' },
-    { id: 'properties', name: 'My Properties', icon: 'Home' },
-    { id: 'bookings', name: 'Booking Requests', icon: 'Calendar' },
+const tabs = [
+    { id: 'overview', name: 'Översikt', icon: 'BarChart3' },
+    { id: 'properties', name: 'Mina fastigheter', icon: 'Home' },
+    { id: 'bookings', name: 'Bokningsförfrågningar', icon: 'Calendar' },
   ];
 
 return (
     <div className="min-h-screen bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
+<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
           <div>
-            <h1 className="text-3xl font-semibold text-neutral-900">Property Owner Dashboard</h1>
-            <p className="text-neutral-600 mt-2 text-sm">Manage your properties and bookings</p>
+            <h1 className="text-3xl font-semibold text-neutral-900">Fastighetsägarinstrumentpanel</h1>
+            <p className="text-neutral-600 mt-2 text-sm">Hantera dina fastigheter och bokningar</p>
           </div>
           <Link
             to="/create-listing"
             className="btn-primary flex items-center space-x-2 mt-6 sm:mt-0"
           >
             <ApperIcon name="Plus" className="h-4 w-4" />
-            <span>Add New Property</span>
+            <span>Lägg till ny fastighet</span>
           </Link>
         </div>
 
