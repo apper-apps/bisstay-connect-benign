@@ -411,9 +411,10 @@ className="input-field"
                       <span>Publicera listning</span>
                     </>
                   )}
-                </button>
+</button>
               )}
             </div>
+          </form>
         </motion.div>
       </div>
     </div>
