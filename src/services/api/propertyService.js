@@ -210,7 +210,99 @@ coordinates: { lat: 59.3293, lng: 18.0686 }
       throw new Error('Property not found');
     }
     
-    saveData(filteredProperties);
+saveData(filteredProperties);
     return true;
+  },
+
+  // Calculate distance between two coordinates using Haversine formula
+  calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  },
+
+  async searchNearby(latitude, longitude, radiusKm = 50, filters = {}) {
+    initializeData();
+    await new Promise(resolve => setTimeout(resolve, 300));
+    
+    const properties = getData();
+    
+    // Filter by distance
+    let nearbyProperties = properties.filter(property => {
+      const distance = this.calculateDistance(
+        latitude, 
+        longitude, 
+        property.coordinates.lat, 
+        property.coordinates.lng
+      );
+      return distance <= radiusKm;
+    });
+
+    // Apply additional filters
+    if (filters.priceRange) {
+      nearbyProperties = nearbyProperties.filter(p => 
+        p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
+      );
+    }
+
+    if (filters.propertyTypes && filters.propertyTypes.length > 0) {
+      nearbyProperties = nearbyProperties.filter(p => 
+        filters.propertyTypes.includes(p.propertyType)
+      );
+    }
+
+    if (filters.minCapacity) {
+      nearbyProperties = nearbyProperties.filter(p => 
+        p.capacity >= filters.minCapacity
+      );
+    }
+
+    if (filters.amenities && filters.amenities.length > 0) {
+      nearbyProperties = nearbyProperties.filter(p => 
+        filters.amenities.every(amenity => p.amenities.includes(amenity))
+      );
+    }
+
+    return nearbyProperties;
+  },
+
+  // Geocoding simulation for Swedish cities
+  async geocodeLocation(locationName) {
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
+    const swedishCities = {
+      'stockholm': { lat: 59.3293, lng: 18.0686, name: 'Stockholm' },
+      'göteborg': { lat: 57.7089, lng: 11.9746, name: 'Göteborg' },
+      'malmö': { lat: 55.6050, lng: 13.0038, name: 'Malmö' },
+      'uppsala': { lat: 59.8586, lng: 17.6389, name: 'Uppsala' },
+      'västerås': { lat: 59.6162, lng: 16.5528, name: 'Västerås' },
+      'örebro': { lat: 59.2741, lng: 15.2066, name: 'Örebro' },
+      'linköping': { lat: 58.4108, lng: 15.6214, name: 'Linköping' },
+      'helsingborg': { lat: 56.0465, lng: 12.6945, name: 'Helsingborg' },
+      'jönköping': { lat: 57.7826, lng: 14.1618, name: 'Jönköping' },
+      'norrköping': { lat: 58.5877, lng: 16.1924, name: 'Norrköping' }
+    };
+
+    const normalizedLocation = locationName.toLowerCase().trim();
+    
+    // Direct match
+    if (swedishCities[normalizedLocation]) {
+      return swedishCities[normalizedLocation];
+    }
+
+    // Partial match
+    for (const [key, value] of Object.entries(swedishCities)) {
+      if (key.includes(normalizedLocation) || normalizedLocation.includes(key)) {
+        return value;
+      }
+    }
+
+    throw new Error('Location not found');
   }
 };
