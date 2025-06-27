@@ -74,24 +74,24 @@ const PropertyDetailPage = () => {
     return amenityIcons[key] || 'Check';
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+return (
+    <div className="min-h-screen bg-neutral-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+          className="bg-white rounded-xl shadow-card overflow-hidden border border-neutral-200"
         >
           {/* Header */}
-          <div className="p-8 border-b border-gray-200">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-              <div className="mb-4 lg:mb-0">
-<h1 className="text-3xl font-bold text-gray-900 mb-2">{property.title}</h1>
-                <div className="flex items-center text-gray-600 mb-2">
-                  <ApperIcon name="MapPin" className="h-5 w-5 mr-2" />
-                  <span>{property.address}</span>
+          <div className="p-8 border-b border-neutral-200">
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
+              <div className="mb-6 lg:mb-0">
+<h1 className="text-3xl font-semibold text-neutral-900 mb-3">{property.title}</h1>
+                <div className="flex items-center text-neutral-600 mb-3">
+                  <ApperIcon name="MapPin" className="h-4 w-4 mr-2" />
+                  <span className="text-sm">{property.address}</span>
                 </div>
-                <div className="flex items-center space-x-6 text-sm text-gray-600">
+                <div className="flex items-center space-x-6 text-sm text-neutral-600">
                   <div className="flex items-center">
 <ApperIcon name="Users" className="h-4 w-4 mr-1" />
                     <span>Upp till {property.capacity} arbetare</span>
@@ -103,9 +103,9 @@ const PropertyDetailPage = () => {
                 </div>
               </div>
               
-              <div className="text-right">
-<div className="text-3xl font-bold text-primary-600">{property.price} kr</div>
-                <div className="text-gray-500">per natt</div>
+              <div className="text-right lg:text-left">
+<div className="text-2xl font-semibold text-neutral-900">{property.price} kr</div>
+                <div className="text-neutral-500 text-sm">per natt</div>
               </div>
             </div>
           </div>
@@ -122,19 +122,19 @@ const PropertyDetailPage = () => {
                 <p className="text-gray-600 leading-relaxed">{property.description}</p>
               </div>
 
-              {/* Amenities */}
+{/* Amenities */}
               <div>
-<h2 className="text-2xl font-semibold text-gray-900 mb-6">Bekvämligheter</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+<h2 className="text-xl font-medium text-neutral-900 mb-6">Bekvämligheter</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {property.amenities.map((amenity, index) => (
                     <div
                       key={index}
-                      className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg"
+                      className="flex items-center space-x-3 p-4 bg-neutral-50 rounded-lg border border-neutral-200"
                     >
-                      <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <ApperIcon name={getAmenityIcon(amenity)} className="h-4 w-4 text-primary-600" />
+                      <div className="w-7 h-7 bg-neutral-200 rounded-lg flex items-center justify-center">
+                        <ApperIcon name={getAmenityIcon(amenity)} className="h-4 w-4 text-neutral-700" />
                       </div>
-                      <span className="text-gray-700 font-medium">{amenity}</span>
+                      <span className="text-neutral-700 text-sm font-medium">{amenity}</span>
                     </div>
                   ))}
                 </div>

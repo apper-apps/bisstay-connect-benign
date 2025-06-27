@@ -105,11 +105,11 @@ const BrowsePropertiesPage = () => {
   if (loading) return <Loading type="properties" />;
   if (error) return <Error message={error} onRetry={loadProperties} />;
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+return (
+    <div className="min-h-screen bg-neutral-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Search Header */}
-        <div className="mb-8">
+        <div className="mb-12">
           <SearchBar
             searchFilters={searchFilters}
             onSearchChange={setSearchFilters}
@@ -118,35 +118,35 @@ const BrowsePropertiesPage = () => {
         </div>
 
         {/* Results Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-          <div className="mb-4 sm:mb-0">
-<h1 className="text-2xl font-bold text-gray-900">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+          <div className="mb-6 sm:mb-0">
+<h1 className="text-3xl font-semibold text-neutral-900 mb-2">
               Tillgängliga fastigheter
             </h1>
-            <p className="text-gray-600">
+            <p className="text-neutral-600 text-sm">
               {filteredProperties.length} fastighet{filteredProperties.length !== 1 ? 'er' : ''} hittade
             </p>
           </div>
 
-          <div className="flex items-center space-x-4">
+<div className="flex items-center space-x-3">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 bg-white border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors text-sm"
             >
 <ApperIcon name="Filter" className="h-4 w-4" />
               <span>Filter</span>
             </button>
 
-            <div className="flex items-center space-x-2 bg-white border border-gray-300 rounded-lg p-1">
+            <div className="flex items-center bg-white border border-neutral-200 rounded-lg overflow-hidden">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded ${viewMode === 'grid' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}
+                className={`p-2.5 transition-colors ${viewMode === 'grid' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'}`}
               >
                 <ApperIcon name="Grid3X3" className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded ${viewMode === 'list' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}
+                className={`p-2.5 transition-colors ${viewMode === 'list' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'}`}
               >
                 <ApperIcon name="List" className="h-4 w-4" />
               </button>

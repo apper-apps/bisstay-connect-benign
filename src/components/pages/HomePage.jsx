@@ -67,18 +67,18 @@ const steps = [
     }
   ];
 
-  return (
+return (
     <div className="min-h-screen">
 {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-50 via-white to-amber-50 pt-20 pb-16">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23f1f5f9%22%20fill-opacity%3D%220.4%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <section className="relative bg-white pt-24 pb-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-50 to-white"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
+              className="text-4xl md:text-6xl font-semibold text-neutral-900 mb-8 leading-tight"
 >
               Byggarbetarboenden
               <span className="block gradient-text">Enkelt gjort</span>
@@ -88,7 +88,7 @@ const steps = [
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
+              className="text-lg text-neutral-600 max-w-3xl mx-auto mb-12"
             >
               Koppla samman fastighetsägare med byggföretag. Hitta kvalitetsboenden för tillfällig 
               inkvartering av din arbetsstyrka eller lista dina fastigheter för pålitlig hyresintäkt.
@@ -100,7 +100,7 @@ const steps = [
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-4xl mx-auto mb-12"
           >
             <SearchBar
               searchFilters={searchFilters}
@@ -114,33 +114,33 @@ const steps = [
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
 <Link to="/browse" className="btn-primary flex items-center space-x-2">
-              <ApperIcon name="Search" className="h-5 w-5" />
+              <ApperIcon name="Search" className="h-4 w-4" />
               <span>Bläddra fastigheter</span>
             </Link>
             <Link to="/create-listing" className="btn-secondary flex items-center space-x-2">
-              <ApperIcon name="Plus" className="h-5 w-5" />
+              <ApperIcon name="Plus" className="h-4 w-4" />
               <span>Lista din fastighet</span>
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
+{/* Features Section */}
+      <section className="py-24 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-20">
+<h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-6">
               Varför välja Stay on Site?
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
               Strömlinjeformad plattform designad specifikt för byggindustrins bostadsbehov
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -148,13 +148,13 @@ const steps = [
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card p-8 text-center hover:shadow-2xl transition-all duration-300"
+                className="card p-8 text-center border border-neutral-200"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-amber-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                  <ApperIcon name={feature.icon} className="h-8 w-8 text-white" />
+                <div className="w-12 h-12 bg-neutral-900 rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <ApperIcon name={feature.icon} className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-lg font-medium text-neutral-900 mb-4">{feature.title}</h3>
+                <p className="text-neutral-600 text-sm">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -203,30 +203,30 @@ const steps = [
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 to-primary-700">
+{/* CTA Section */}
+      <section className="py-24 bg-neutral-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+<h2 className="text-3xl md:text-4xl font-semibold text-white mb-8">
               Redo att komma igång?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-lg text-neutral-300 mb-12">
               Gå med tusentals byggföretag och fastighetsägare som redan använder Stay on Site
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 to="/browse" 
-                className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
+                className="bg-white text-neutral-900 px-8 py-3 rounded-lg font-medium hover:bg-neutral-50 transition-colors"
               >
                 Hitta boende nu
               </Link>
               <Link 
                 to="/create-listing" 
-                className="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg"
+                className="bg-accent-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-accent-600 transition-colors"
               >
                 Lista din fastighet
               </Link>

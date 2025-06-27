@@ -124,33 +124,33 @@ const CreateListingPage = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+return (
+    <div className="min-h-screen bg-neutral-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">List Your Property</h1>
-          <p className="text-gray-600">Create a listing for construction worker housing</p>
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-semibold text-neutral-900 mb-3">List Your Property</h1>
+          <p className="text-neutral-600 text-sm">Create a listing for construction worker housing</p>
         </div>
 
         {/* Progress Steps */}
-        <div className="mb-8">
+        <div className="mb-10">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+                <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 transition-colors ${
                   currentStep >= step.id
-                    ? 'bg-primary-600 border-primary-600 text-white'
-                    : 'border-gray-300 text-gray-400'
+                    ? 'bg-neutral-900 border-neutral-900 text-white'
+                    : 'border-neutral-300 text-neutral-400'
                 }`}>
-                  <ApperIcon name={step.icon} className="h-5 w-5" />
+                  <ApperIcon name={step.icon} className="h-4 w-4" />
                 </div>
-                <div className={`ml-3 ${currentStep >= step.id ? 'text-primary-600' : 'text-gray-400'}`}>
-                  <div className="text-sm font-medium">{step.name}</div>
+                <div className={`ml-3 ${currentStep >= step.id ? 'text-neutral-900' : 'text-neutral-400'}`}>
+                  <div className="text-xs font-medium">{step.name}</div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-12 h-0.5 mx-4 ${
-                    currentStep > step.id ? 'bg-primary-600' : 'bg-gray-300'
+                  <div className={`w-12 h-0.5 mx-4 transition-colors ${
+                    currentStep > step.id ? 'bg-neutral-900' : 'bg-neutral-300'
                   }`} />
                 )}
               </div>

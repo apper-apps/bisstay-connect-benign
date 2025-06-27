@@ -25,17 +25,18 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorksPage />} />
         </Routes>
       </Layout>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
+<ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={true}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
+        className="text-sm"
       />
     </Router>
   );

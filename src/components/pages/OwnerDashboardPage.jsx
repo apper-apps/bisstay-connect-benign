@@ -81,18 +81,18 @@ const OwnerDashboardPage = () => {
     { id: 'bookings', name: 'Booking Requests', icon: 'Calendar' },
   ];
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+return (
+    <div className="min-h-screen bg-neutral-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Property Owner Dashboard</h1>
-            <p className="text-gray-600 mt-1">Manage your properties and bookings</p>
+            <h1 className="text-3xl font-semibold text-neutral-900">Property Owner Dashboard</h1>
+            <p className="text-neutral-600 mt-2 text-sm">Manage your properties and bookings</p>
           </div>
           <Link
             to="/create-listing"
-            className="btn-primary flex items-center space-x-2 mt-4 sm:mt-0"
+            className="btn-primary flex items-center space-x-2 mt-6 sm:mt-0"
           >
             <ApperIcon name="Plus" className="h-4 w-4" />
             <span>Add New Property</span>
@@ -155,24 +155,23 @@ const OwnerDashboardPage = () => {
                     );
                   })}
                 </div>
-
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Performing Properties</h3>
+<div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
+                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Top Performing Properties</h3>
                   {properties.slice(0, 5).map((property) => (
-                    <div key={property.Id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                    <div key={property.Id} className="flex items-center justify-between py-4 border-b border-neutral-100 last:border-b-0">
                       <div className="flex items-center space-x-3">
                         <img
                           src={property.images[0]}
                           alt={property.title}
-                          className="w-12 h-12 rounded-lg object-cover"
+                          className="w-10 h-10 rounded-lg object-cover"
                         />
                         <div>
-                          <div className="font-medium text-gray-900">{property.title}</div>
-                          <div className="text-sm text-gray-500">${property.price}/night</div>
+                          <div className="font-medium text-neutral-900 text-sm">{property.title}</div>
+                          <div className="text-xs text-neutral-500">${property.price}/night</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-neutral-900">
                           {bookings.filter(b => b.propertyId === property.Id).length} bookings
                         </div>
                       </div>

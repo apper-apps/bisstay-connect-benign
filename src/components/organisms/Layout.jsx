@@ -9,8 +9,8 @@ const Layout = ({ children }) => {
 
   const isHomePage = location.pathname === '/';
 
-  return (
-    <div className="min-h-screen bg-white">
+return (
+    <div className="min-h-screen bg-white antialiased">
       <Header 
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}

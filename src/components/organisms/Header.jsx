@@ -22,28 +22,28 @@ const navItems = [
     }
   };
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-amber-500 rounded-lg flex items-center justify-center">
-              <ApperIcon name="Building2" className="h-6 w-6 text-white" />
+            <div className="w-8 h-8 bg-neutral-900 rounded-lg flex items-center justify-center">
+              <ApperIcon name="Building2" className="h-5 w-5 text-white" />
             </div>
-<span className="text-xl font-bold gradient-text">Stay on Site</span>
+<span className="text-lg font-semibold text-neutral-900">Stay on Site</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+{/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors text-sm ${
                   location.pathname === item.path
-                    ? 'bg-primary-50 text-primary-700 font-medium'
-                    : 'text-gray-600 hover:text-primary-700 hover:bg-gray-50'
+                    ? 'bg-neutral-100 text-neutral-900 font-medium'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
                 }`}
               >
                 <ApperIcon name={item.icon} className="h-4 w-4" />
@@ -67,9 +67,9 @@ const navItems = [
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+            className="md:hidden p-2 rounded-lg text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 transition-colors"
           >
-            <ApperIcon name={mobileMenuOpen ? "X" : "Menu"} className="h-6 w-6" />
+            <ApperIcon name={mobileMenuOpen ? "X" : "Menu"} className="h-5 w-5" />
           </button>
         </div>
       </div>

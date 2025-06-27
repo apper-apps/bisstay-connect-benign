@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import ApperIcon from '@/components/ApperIcon';
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import React from "react";
+import ApperIcon from "@/components/ApperIcon";
 
 const HowItWorksPage = () => {
   const forCompanies = [
@@ -109,16 +110,16 @@ const HowItWorksPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-700 text-white py-16">
+{/* Hero Section */}
+      <section className="bg-neutral-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">How BizStay Connect Works</h1>
-            <p className="text-xl text-primary-100 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-semibold mb-6">How BizStay Connect Works</h1>
+            <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
               Connecting construction companies with property owners for temporary worker housing
             </p>
           </motion.div>
@@ -169,7 +170,7 @@ const HowItWorksPage = () => {
             <p className="text-lg text-gray-600">List your property and start earning income in 4 simple steps</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {forOwners.map((step, index) => (
               <motion.div
                 key={step.step}
@@ -190,7 +191,7 @@ const HowItWorksPage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/create-listing" className="btn-secondary">
+            <Link to="/create-listing" className="btn-primary">
               List Your Property
             </Link>
           </div>
