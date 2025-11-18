@@ -20,6 +20,8 @@ function App() {
 theme="light"
         className="text-sm"
       />
-    </>
+</>
   );
 }
+
+export default App;
