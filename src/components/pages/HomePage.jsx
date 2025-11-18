@@ -162,44 +162,95 @@ return (
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-primary-50">
+<section className="py-24 bg-gradient-to-br from-neutral-50 via-primary-50/30 to-accent-50/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Så fungerar det
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Kom igång i tre enkla steg
-            </p>
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+                Så fungerar det
+              </h2>
+              <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+                Kom igång med vår plattform i tre enkla steg och hitta perfekta boendelösningar för ditt byggprojekt
+              </p>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
+            {/* Connection lines for desktop */}
+            <div className="hidden md:block absolute top-20 left-0 right-0 h-0.5">
+              <div className="absolute left-1/6 right-1/6 h-full bg-gradient-to-r from-primary-200 via-accent-300 to-primary-200"></div>
+            </div>
+            
             {steps.map((step, index) => (
               <motion.div
                 key={step.step}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
+                transition={{ delay: index * 0.3, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="relative"
+                className="relative z-10"
               >
-                <div className="card p-8 text-center h-full">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <ApperIcon name={step.icon} className="h-8 w-8 text-white" />
+                <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-300 border border-neutral-100 group hover:-translate-y-2 h-full">
+                  {/* Step number indicator */}
+                  <div className="relative mb-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                      <ApperIcon name={step.icon} className="h-10 w-10 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
+                      0{index + 1}
+                    </div>
                   </div>
-                  <div className="text-2xl font-bold gradient-text mb-4">{step.step}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+                  
+                  <div className="text-center">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 bg-clip-text text-transparent mb-4">
+                      {step.step}
+                    </div>
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-4 leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ApperIcon name="ArrowRight" className="h-6 w-6 text-gray-300" />
-                  </div>
-                )}
               </motion.div>
             ))}
           </div>
+
+          {/* Call to action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mt-16"
+          >
+            <div className="bg-gradient-to-r from-primary-600 to-accent-500 rounded-2xl p-8 text-white shadow-elevated">
+              <h3 className="text-2xl font-bold mb-4">Redo att komma igång?</h3>
+              <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
+                Gå med i tusentals byggföretag och fastighetsägare som redan använder vår plattform för att förenkla sina boendelösningar.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-neutral-50 transition-colors duration-200 shadow-md hover:shadow-lg">
+                  <span className="flex items-center gap-2">
+                    <ApperIcon name="Building2" className="h-5 w-5" />
+                    Jag är ett byggföretag
+                  </span>
+                </button>
+                <button className="bg-accent-400 text-white px-8 py-3 rounded-lg font-semibold hover:bg-accent-500 transition-colors duration-200 shadow-md hover:shadow-lg">
+                  <span className="flex items-center gap-2">
+                    <ApperIcon name="Home" className="h-5 w-5" />
+                    Jag är fastighetsägare
+                  </span>
+                </button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
