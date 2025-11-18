@@ -74,7 +74,7 @@ const BookingRequests = ({ bookings, properties, onStatusUpdate }) => {
                                 </div>
                                 <div className="flex items-center">
                                     <ApperIcon name="DollarSign" className="h-4 w-4 mr-2" />
-                                    <span className="font-medium">${booking.totalPrice}total</span>
+<span className="font-medium">{booking.totalPrice_c || booking.totalPrice} kr totalt</span>
                                 </div>
                             </div>
                             {booking.message && <div className="mt-3 p-3 bg-gray-50 rounded-lg">

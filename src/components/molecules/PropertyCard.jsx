@@ -127,7 +127,7 @@ className="btn-primary"
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-lg font-semibold text-gray-900">{property.title}</h3>
           <div className="text-right">
-<div className="text-xl font-bold text-primary-600">{property.price} kr</div>
+<div className="text-xl font-bold text-primary-600">{property.price_c || property.price} kr</div>
             <div className="text-xs text-gray-500">per natt</div>
           </div>
         </div>

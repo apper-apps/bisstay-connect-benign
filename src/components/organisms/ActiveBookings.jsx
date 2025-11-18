@@ -94,7 +94,7 @@ const ActiveBookings = ({ bookings, properties }) => {
                       <ApperIcon name="DollarSign" className="h-4 w-4 mr-2" />
 <div>
                         <div className="font-medium">Totalt</div>
-                        <div>{booking.totalPrice} kr</div>
+<div>{booking.totalPrice_c || booking.totalPrice} kr</div>
                       </div>
                     </div>
                   </div>

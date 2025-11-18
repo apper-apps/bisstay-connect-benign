@@ -166,12 +166,12 @@ const BookingWidget = ({ property, onBookingRequest, loading }) => {
         {nights > 0 && (
           <div className="border-t pt-4 space-y-2">
             <div className="flex justify-between text-sm">
-              <span>${property.price} × {nights} night{nights > 1 ? 's' : ''}</span>
-              <span>${total}</span>
+<span>{property.price_c || property.price} kr × {nights} natt{nights > 1 ? 'er' : ''}</span>
+              <span>{total} kr</span>
             </div>
             <div className="flex justify-between font-semibold text-lg border-t pt-2">
               <span>Total</span>
-              <span className="text-primary-600">${total}</span>
+              <span className="text-primary-600">{total} kr</span>
             </div>
           </div>
         )}

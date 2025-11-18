@@ -1,0 +1,126 @@
+{
+  "/": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Homepage is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/browse": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Browse properties is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/property/:id": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Property details are public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/owner-dashboard": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Owner dashboard requires authentication",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/company-dashboard": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Company dashboard requires authentication",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/create-listing": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Create listing requires authentication",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/messages": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Messages require authentication",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/how-it-works": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "How it works is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/login": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Login page is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/signup": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Signup page is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  }
+}

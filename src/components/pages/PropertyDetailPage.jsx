@@ -104,7 +104,7 @@ return (
               </div>
               
               <div className="text-right lg:text-left">
-<div className="text-2xl font-semibold text-neutral-900">{property.price} kr</div>
+<div className="text-2xl font-semibold text-neutral-900">{property.price_c || property.price} kr</div>
                 <div className="text-neutral-500 text-sm">per natt</div>
               </div>
             </div>

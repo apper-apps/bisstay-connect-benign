@@ -1,168 +1,266 @@
-const STORAGE_KEY = 'bisstay_bookings';
+import { getApperClient } from '@/services/apperClient';
+import { toast } from 'react-toastify';
 
-// Mock data
-const defaultBookings = [
-{
-    Id: 1,
-    propertyId: 1,
-    companyId: 'Skanska Sverige',
-    startDate: '2024-02-15',
-    endDate: '2024-03-15',
-    guests: 6,
-    status: 'confirmed',
-    totalPrice: 54000,
-    message: 'Vi behöver boende för vårt Stockholm-projekt team. Ser fram emot att arbeta med er.',
-    companyName: 'Skanska Sverige',
-    contactEmail: 'projekt@skanska.se',
-    contactPhone: '08-123-4567',
-    createdAt: '2024-01-20T10:00:00Z'
-  },
-  {
-    Id: 2,
-    propertyId: 2,
-    companyId: 'NCC Sverige',
-    startDate: '2024-02-01',
-    endDate: '2024-02-28',
-    guests: 4,
-    status: 'pending',
-    totalPrice: 33600,
-    message: 'Vårt team kommer att arbeta på det nya kontorskomplexet i närheten. Vi behöver rena, bekväma boenden.',
-    companyName: 'NCC Sverige',
-    contactEmail: 'boende@ncc.se',
-    contactPhone: '031-234-5678',
-    createdAt: '2024-01-18T14:00:00Z'
-  },
-  {
-    Id: 3,
-    propertyId: 3,
-    companyId: 'Peab Byggservice',
-    startDate: '2024-01-25',
-    endDate: '2024-04-25',
-    guests: 12,
-    status: 'confirmed',
-    totalPrice: 58500,
-    message: 'Långsiktigt projekt som kräver arbetarboende. Vi uppskattar boende i kollektivform.',
-    companyName: 'Peab Byggservice',
-    contactEmail: 'admin@peab.se',
-    contactPhone: '040-345-6789',
-    createdAt: '2024-01-15T09:00:00Z'
-  },
-  {
-    Id: 4,
-    propertyId: 4,
-    companyId: 'Svevia Väg & Anläggning',
-    startDate: '2024-02-10',
-    endDate: '2024-03-10',
-    guests: 5,
-    status: 'pending',
-    totalPrice: 25500,
-    message: 'Vägbyggnadsprojekt. Behöver tillfälligt boende för vårt arbetslag.',
-    companyName: 'Svevia Väg & Anläggning',
-    contactEmail: 'arbetslag@svevia.se',
-    contactPhone: '018-456-7890',
-    createdAt: '2024-01-22T11:00:00Z'
-  },
-  {
-    Id: 5,
-    propertyId: 5,
-    companyId: 'JM Entreprenad',
-    startDate: '2024-03-01',
-    endDate: '2024-05-01',
-    guests: 4,
-    status: 'confirmed',
-    totalPrice: 150000,
-    message: 'Exklusivt byggprojekt. Söker premium boenden för vårt ledningsteam.',
-    companyName: 'JM Entreprenad',
-    contactEmail: 'ledning@jm.se',
-    contactPhone: '08-567-8901',
-    createdAt: '2024-01-25T13:00:00Z'
-  }
-];
-
-// Initialize data
-const initializeData = () => {
-  const existing = localStorage.getItem(STORAGE_KEY);
-  if (!existing) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultBookings));
-  }
-};
-
-// Helper to get data from localStorage
-const getData = () => {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : [];
-};
-
-// Helper to save data to localStorage
-const saveData = (data) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-};
-
-// Service methods
 export const bookingService = {
   async getAll() {
-    initializeData();
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return getData();
+    try {
+      const apperClient = getApperClient();
+      
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "propertyId_c"}},
+          {"field": {"Name": "companyId_c"}},
+          {"field": {"Name": "companyName_c"}},
+          {"field": {"Name": "startDate_c"}},
+          {"field": {"Name": "endDate_c"}},
+          {"field": {"Name": "guests_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "totalPrice_c"}},
+          {"field": {"Name": "message_c"}},
+          {"field": {"Name": "contactEmail_c"}},
+          {"field": {"Name": "contactPhone_c"}},
+          {"field": {"Name": "CreatedOn"}}
+        ],
+        orderBy: [{
+          "fieldName": "CreatedOn",
+          "sorttype": "DESC"
+        }]
+      };
+
+      const response = await apperClient.fetchRecords('booking_c', params);
+      
+      if (!response.success) {
+        console.error('Failed to fetch bookings:', response);
+        return [];
+      }
+
+      // Transform database fields to match UI expectations
+      return response.data.map(booking => ({
+        Id: booking.Id,
+        propertyId: booking.propertyId_c?.Id || booking.propertyId_c || null,
+        companyId: booking.companyId_c || 'unknown',
+        companyName: booking.companyName_c || '',
+        startDate: booking.startDate_c || '',
+        endDate: booking.endDate_c || '',
+        guests: booking.guests_c || 1,
+        status: booking.status_c || 'pending',
+        totalPrice: booking.totalPrice_c || 0,
+        message: booking.message_c || '',
+        contactEmail: booking.contactEmail_c || '',
+        contactPhone: booking.contactPhone_c || '',
+        createdAt: booking.CreatedOn
+      }));
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+      return [];
+    }
   },
 
   async getById(id) {
-    initializeData();
-    await new Promise(resolve => setTimeout(resolve, 200));
-    const bookings = getData();
-    const booking = bookings.find(b => b.Id === id);
-    if (!booking) {
-      throw new Error('Booking not found');
+    try {
+      const apperClient = getApperClient();
+      
+      const params = {
+        fields: [
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "propertyId_c"}},
+          {"field": {"Name": "companyId_c"}},
+          {"field": {"Name": "companyName_c"}},
+          {"field": {"Name": "startDate_c"}},
+          {"field": {"Name": "endDate_c"}},
+          {"field": {"Name": "guests_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "totalPrice_c"}},
+          {"field": {"Name": "message_c"}},
+          {"field": {"Name": "contactEmail_c"}},
+          {"field": {"Name": "contactPhone_c"}},
+          {"field": {"Name": "CreatedOn"}}
+        ]
+      };
+
+      const response = await apperClient.getRecordById('booking_c', id, params);
+      
+      if (!response.success) {
+        console.error(`Failed to fetch booking with Id: ${id}:`, response);
+        throw new Error('Booking not found');
+      }
+
+      if (!response.data) {
+        throw new Error('Booking not found');
+      }
+
+      // Transform database fields to match UI expectations
+      const booking = response.data;
+      return {
+        Id: booking.Id,
+        propertyId: booking.propertyId_c?.Id || booking.propertyId_c || null,
+        companyId: booking.companyId_c || 'unknown',
+        companyName: booking.companyName_c || '',
+        startDate: booking.startDate_c || '',
+        endDate: booking.endDate_c || '',
+        guests: booking.guests_c || 1,
+        status: booking.status_c || 'pending',
+        totalPrice: booking.totalPrice_c || 0,
+        message: booking.message_c || '',
+        contactEmail: booking.contactEmail_c || '',
+        contactPhone: booking.contactPhone_c || '',
+        createdAt: booking.CreatedOn
+      };
+    } catch (error) {
+      console.error(`Error fetching booking ${id}:`, error);
+      throw error;
     }
-    return booking;
   },
 
   async create(bookingData) {
-    initializeData();
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    const bookings = getData();
-    const maxId = bookings.length > 0 ? Math.max(...bookings.map(b => b.Id)) : 0;
-    
-    const newBooking = {
-      ...bookingData,
-      Id: maxId + 1,
-      createdAt: new Date().toISOString()
-    };
-    
-    bookings.push(newBooking);
-    saveData(bookings);
-    return newBooking;
+    try {
+      const apperClient = getApperClient();
+      
+      // Transform UI data to database field names - only updateable fields
+      const dbRecord = {
+        Name: `Booking for ${bookingData.companyName || 'Company'} - ${bookingData.startDate}`,
+        propertyId_c: parseInt(bookingData.propertyId),
+        companyId_c: bookingData.companyId || 'unknown',
+        companyName_c: bookingData.companyName || '',
+        startDate_c: bookingData.startDate || '',
+        endDate_c: bookingData.endDate || '',
+        guests_c: parseInt(bookingData.guests) || 1,
+        status_c: bookingData.status || 'pending',
+        totalPrice_c: parseFloat(bookingData.totalPrice) || 0,
+        message_c: bookingData.message || '',
+        contactEmail_c: bookingData.contactEmail || '',
+        contactPhone_c: bookingData.contactPhone || ''
+      };
+
+      const params = {
+        records: [dbRecord]
+      };
+
+      const response = await apperClient.createRecord('booking_c', params);
+      
+      if (!response.success) {
+        console.error('Failed to create booking:', response);
+        throw new Error(response.message || 'Failed to create booking');
+      }
+
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to create ${failed.length} booking:`, failed);
+          failed.forEach(record => {
+            if (record.errors) {
+              record.errors.forEach(error => toast.error(`${error.fieldLabel}: ${error}`));
+            }
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        if (successful.length > 0) {
+          return successful[0].data;
+        }
+      }
+
+      throw new Error('No successful booking creation');
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      throw error;
+    }
   },
 
   async update(id, updates) {
-    initializeData();
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
-    const bookings = getData();
-    const index = bookings.findIndex(b => b.Id === id);
-    
-    if (index === -1) {
-      throw new Error('Booking not found');
+    try {
+      const apperClient = getApperClient();
+      
+      // Transform UI updates to database field names - only updateable fields
+      const dbUpdates = {
+        Id: id
+      };
+
+      if (updates.propertyId !== undefined) dbUpdates.propertyId_c = parseInt(updates.propertyId);
+      if (updates.companyId !== undefined) dbUpdates.companyId_c = updates.companyId;
+      if (updates.companyName !== undefined) dbUpdates.companyName_c = updates.companyName;
+      if (updates.startDate !== undefined) dbUpdates.startDate_c = updates.startDate;
+      if (updates.endDate !== undefined) dbUpdates.endDate_c = updates.endDate;
+      if (updates.guests !== undefined) dbUpdates.guests_c = parseInt(updates.guests);
+      if (updates.status !== undefined) dbUpdates.status_c = updates.status;
+      if (updates.totalPrice !== undefined) dbUpdates.totalPrice_c = parseFloat(updates.totalPrice);
+      if (updates.message !== undefined) dbUpdates.message_c = updates.message;
+      if (updates.contactEmail !== undefined) dbUpdates.contactEmail_c = updates.contactEmail;
+      if (updates.contactPhone !== undefined) dbUpdates.contactPhone_c = updates.contactPhone;
+
+      const params = {
+        records: [dbUpdates]
+      };
+
+      const response = await apperClient.updateRecord('booking_c', params);
+      
+      if (!response.success) {
+        console.error('Failed to update booking:', response);
+        throw new Error(response.message || 'Failed to update booking');
+      }
+
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to update ${failed.length} booking:`, failed);
+          failed.forEach(record => {
+            if (record.errors) {
+              record.errors.forEach(error => toast.error(`${error.fieldLabel}: ${error}`));
+            }
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        if (successful.length > 0) {
+          return successful[0].data;
+        }
+      }
+
+      throw new Error('No successful booking update');
+    } catch (error) {
+      console.error('Error updating booking:', error);
+      throw error;
     }
-    
-    bookings[index] = { ...bookings[index], ...updates };
-    saveData(bookings);
-    return bookings[index];
   },
 
   async delete(id) {
-    initializeData();
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    const bookings = getData();
-    const filteredBookings = bookings.filter(b => b.Id !== id);
-    
-    if (filteredBookings.length === bookings.length) {
-      throw new Error('Booking not found');
+    try {
+      const apperClient = getApperClient();
+      
+      const params = { 
+        RecordIds: [id]
+      };
+
+      const response = await apperClient.deleteRecord('booking_c', params);
+      
+      if (!response.success) {
+        console.error('Failed to delete booking:', response);
+        throw new Error(response.message || 'Failed to delete booking');
+      }
+
+      if (response.results) {
+        const successful = response.results.filter(r => r.success);
+        const failed = response.results.filter(r => !r.success);
+        
+        if (failed.length > 0) {
+          console.error(`Failed to delete ${failed.length} booking:`, failed);
+          failed.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+        }
+
+        return successful.length > 0;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+      throw error;
     }
-    
-    saveData(filteredBookings);
-    return true;
   }
 };

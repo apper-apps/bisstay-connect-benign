@@ -1,8 +1,26 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ApperIcon from '@/components/ApperIcon';
 import RoleSelector from '@/components/molecules/RoleSelector';
+import { useAuth } from '@/layouts/Root';
 
+const LogoutButton = () => {
+  const { user } = useSelector(state => state.user);
+  const { logout } = useAuth();
+
+  if (!user) return null;
+
+  return (
+    <button
+      onClick={logout}
+      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+    >
+      <ApperIcon name="LogOut" className="h-4 w-4" />
+      <span>Logga ut</span>
+    </button>
+  );
+};
 const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();

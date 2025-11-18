@@ -1,6 +1,8 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import Layout from '@/components/organisms/Layout';
+import { createBrowserRouter } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import Layout from "@/components/organisms/Layout";
+import Root from "@/components/organisms/Root";
+import { authRoutes } from "@/router/authRoutes";
 
 // Lazy load all page components
 const HomePage = lazy(() => import('@/components/pages/HomePage'));
@@ -77,8 +79,15 @@ const mainRoutes = [
 const routes = [
   {
     path: "/",
-    element: <Layout />,
-    children: [...mainRoutes]
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Layout />,
+        children: [...mainRoutes]
+      },
+      ...authRoutes
+    ]
   }
 ];
 
