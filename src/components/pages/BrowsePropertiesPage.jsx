@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
-import PropertyCard from '@/components/molecules/PropertyCard';
-import SearchFilters from '@/components/organisms/SearchFilters';
-import SearchBar from '@/components/molecules/SearchBar';
-import Loading from '@/components/ui/Loading';
-import Error from '@/components/ui/Error';
-import Empty from '@/components/ui/Empty';
-import { propertyService } from '@/services/api/propertyService';
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { propertyService } from "@/services/api/propertyService";
+import ApperIcon from "@/components/ApperIcon";
+import PropertyCard from "@/components/molecules/PropertyCard";
+import SearchBar from "@/components/molecules/SearchBar";
+import Loading from "@/components/ui/Loading";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import SearchFilters from "@/components/organisms/SearchFilters";
 
 const BrowsePropertiesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -105,11 +106,13 @@ const BrowsePropertiesPage = () => {
   if (loading) return <Loading type="properties" />;
   if (error) return <Error message={error} onRetry={loadProperties} />;
 
-return (
-    <div className="min-h-screen bg-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+const { t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search Header */}
-        <div className="mb-12">
+        <div className="mb-8">
           <SearchBar
             searchFilters={searchFilters}
             onSearchChange={setSearchFilters}
@@ -118,23 +121,23 @@ return (
         </div>
 
         {/* Results Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-          <div className="mb-6 sm:mb-0">
-<h1 className="text-3xl font-semibold text-neutral-900 mb-2">
-              Tillgängliga fastigheter
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+          <div>
+            <h1 className="text-3xl font-semibold text-neutral-900 mb-2">
+              {t('browse.title')}
             </h1>
             <p className="text-neutral-600 text-sm">
-              {filteredProperties.length} fastighet{filteredProperties.length !== 1 ? 'er' : ''} hittade
+              {filteredProperties.length} {t('browse.propertiesFound')}{filteredProperties.length !== 1 ? t('browse.propertiesFoundPlural') : ''} {t('browse.hittade')}
             </p>
           </div>
 
-<div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="flex items-center space-x-2 px-4 py-2 bg-white border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors text-sm"
             >
-<ApperIcon name="Filter" className="h-4 w-4" />
-              <span>Filter</span>
+              <ApperIcon name="Filter" className="h-4 w-4" />
+              <span>{t('browse.filter')}</span>
             </button>
 
             <div className="flex items-center bg-white border border-neutral-200 rounded-lg overflow-hidden">
@@ -168,10 +171,10 @@ return (
           <div className="flex-1">
             {filteredProperties.length === 0 ? (
               <Empty
-icon="Home"
-                title="Inga fastigheter hittades"
-                description="Försök justera dina sökkriterier eller filter för att hitta fler fastigheter."
-actionText="Rensa filter"
+                icon="Home"
+                title={t('browse.noProperties.title')}
+                description={t('browse.noProperties.description')}
+                actionText={t('browse.noProperties.action')}
                 onAction={() => {
                   setFilters({
                     priceRange: [0, 5000],

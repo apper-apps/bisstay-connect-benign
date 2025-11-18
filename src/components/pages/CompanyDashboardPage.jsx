@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 import ApperIcon from '@/components/ApperIcon';
 import DashboardStats from '@/components/molecules/DashboardStats';
 import ActiveBookings from '@/components/organisms/ActiveBookings';
@@ -49,10 +50,12 @@ const CompanyDashboardPage = () => {
     monthlySpend: bookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + b.totalPrice, 0)
   };
 
-const tabs = [
-    { id: 'overview', name: 'Översikt', icon: 'BarChart3' },
-    { id: 'bookings', name: 'Mina bokningar', icon: 'Calendar' },
-    { id: 'saved', name: 'Sparade fastigheter', icon: 'Heart' },
+const { t } = useLanguage();
+
+  const tabs = [
+    { id: 'overview', name: t('companyDashboard.tabs.overview'), icon: 'BarChart3' },
+    { id: 'bookings', name: t('companyDashboard.tabs.bookings'), icon: 'Calendar' },
+    { id: 'saved', name: t('companyDashboard.tabs.saved'), icon: 'Heart' },
   ];
 
 return (
@@ -61,15 +64,15 @@ return (
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
           <div>
-<h1 className="text-3xl font-semibold text-neutral-900">Företagsinstrumentpanel</h1>
-            <p className="text-neutral-600 mt-2 text-sm">Hantera dina arbetarbostäder</p>
+<h1 className="text-3xl font-semibold text-neutral-900">{t('companyDashboard.title')}</h1>
+            <p className="text-neutral-600 mt-2 text-sm">{t('companyDashboard.subtitle')}</p>
           </div>
           <Link
             to="/browse"
             className="btn-primary flex items-center space-x-2 mt-6 sm:mt-0"
           >
             <ApperIcon name="Search" className="h-4 w-4" />
-            <span>Hitta boende</span>
+<span>{t('companyDashboard.findAccommodation')}</span>
           </Link>
         </div>
 
@@ -106,7 +109,7 @@ return (
               
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Senaste bokningar</h3>
+<h3 className="text-lg font-medium text-neutral-900 mb-6">{t('companyDashboard.recentBookings')}</h3>
                   {bookings.slice(0, 5).map((booking) => {
                     const property = properties.find(p => p.Id === booking.propertyId);
                     return (
@@ -120,7 +123,7 @@ return (
                             />
                           )}
                           <div>
-                            <div className="font-medium text-neutral-900 text-sm">{property?.title || 'Unknown Property'}</div>
+<div className="font-medium text-neutral-900 text-sm">{property?.title || t('companyDashboard.unknownProperty')}</div>
                             <div className="text-xs text-neutral-500">{booking.startDate} - {booking.endDate}</div>
                           </div>
                         </div>
@@ -140,7 +143,7 @@ return (
                 </div>
 
 <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Kommande incheckningar</h3>
+<h3 className="text-lg font-medium text-neutral-900 mb-6">{t('companyDashboard.upcomingCheckins')}</h3>
                   {bookings.filter(b => b.status === 'confirmed').slice(0, 5).map((booking) => {
                     const property = properties.find(p => p.Id === booking.propertyId);
                     return (
@@ -151,12 +154,12 @@ return (
                           </div>
                           <div>
                             <div className="font-medium text-neutral-900 text-sm">{property?.title || 'Unknown Property'}</div>
-<div className="text-xs text-neutral-500">{booking.guests} arbetare</div>
+<div className="text-xs text-neutral-500">{booking.guests} {t('common.workers')}</div>
                           </div>
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-medium text-neutral-900">{booking.startDate}</div>
-                          <div className="text-xs text-neutral-500">Incheckning</div>
+<div className="text-xs text-neutral-500">{t('companyDashboard.checkin')}</div>
                         </div>
                       </div>
                     );

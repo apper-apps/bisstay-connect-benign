@@ -3,11 +3,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ApperIcon from '@/components/ApperIcon';
 import RoleSelector from '@/components/molecules/RoleSelector';
+import LanguageSelector from '@/components/molecules/LanguageSelector';
 import { useAuth } from '@/layouts/Root';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const LogoutButton = () => {
   const { user } = useSelector(state => state.user);
   const { logout } = useAuth();
+  const { t } = useLanguage();
 
   if (!user) return null;
 
@@ -17,20 +20,21 @@ const LogoutButton = () => {
       className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
     >
       <ApperIcon name="LogOut" className="h-4 w-4" />
-      <span>Logga ut</span>
+      <span>{t('nav.logout')}</span>
     </button>
   );
 };
 const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
-  const location = useLocation();
+const location = useLocation();
   const navigate = useNavigate();
   const [currentRole, setCurrentRole] = useState('company');
+  const { t } = useLanguage();
 
-const navItems = [
-    { name: 'Bläddra fastigheter', path: '/browse', icon: 'Search' },
-    { name: 'Min instrumentpanel', path: currentRole === 'owner' ? '/owner-dashboard' : '/company-dashboard', icon: 'LayoutDashboard' },
-    { name: 'Meddelanden', path: '/messages', icon: 'MessageCircle' },
-    { name: 'Så fungerar det', path: '/how-it-works', icon: 'HelpCircle' },
+  const navItems = [
+    { name: t('nav.browse'), path: '/browse', icon: 'Search' },
+    { name: t('nav.dashboard'), path: currentRole === 'owner' ? '/owner-dashboard' : '/company-dashboard', icon: 'LayoutDashboard' },
+    { name: t('nav.messages'), path: '/messages', icon: 'MessageCircle' },
+    { name: t('nav.howItWorks'), path: '/how-it-works', icon: 'HelpCircle' },
   ];
 
   const handleRoleChange = (role) => {
@@ -53,10 +57,10 @@ return (
           </Link>
 
 {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+<nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.path}
                 to={item.path}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors text-sm ${
                   location.pathname === item.path
@@ -70,6 +74,9 @@ return (
             ))}
           </nav>
 
+          <div className="hidden md:flex items-center space-x-4">
+            <LanguageSelector />
+
           {/* Role Selector & CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <RoleSelector currentRole={currentRole} onRoleChange={handleRoleChange} />
@@ -78,8 +85,9 @@ return (
               className="btn-primary flex items-center space-x-2"
             >
               <ApperIcon name="Plus" className="h-4 w-4" />
-<span>Lista fastighet</span>
+<span>{t('nav.listProperty')}</span>
             </Link>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}

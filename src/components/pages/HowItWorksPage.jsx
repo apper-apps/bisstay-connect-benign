@@ -1,84 +1,87 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ApperIcon from "@/components/ApperIcon";
 
 const HowItWorksPage = () => {
-const forCompanies = [
+  const { t } = useLanguage();
+
+  const forCompanies = [
     {
       step: 1,
-      title: 'Sök fastigheter',
-      description: 'Bläddra bland tillgängliga fastigheter efter plats, datum och kapacitet. Använd filter för att hitta exakt vad du behöver.',
+      title: t('howItWorks.forCompanies.step1.title'),
+      description: t('howItWorks.forCompanies.step1.description'),
       icon: 'Search'
     },
     {
       step: 2,
-      title: 'Visa detaljer',
-      description: 'Kontrollera fastighetsdetaljer, foton, bekvämligheter och priser. Se exakt vad som ingår och är tillgängligt.',
+      title: t('howItWorks.forCompanies.step2.title'),
+      description: t('howItWorks.forCompanies.step2.description'),
       icon: 'Eye'
     },
     {
       step: 3,
-      title: 'Begär bokning',
-      description: 'Skicka en bokningsförfrågan med dina datum, antal arbetare och projektdetaljer.',
+      title: t('howItWorks.forCompanies.step3.title'),
+      description: t('howItWorks.forCompanies.step3.description'),
       icon: 'Calendar'
     },
     {
       step: 4,
-      title: 'Få bekräftelse',
-      description: 'Fastighetsägare kommer att granska och svara på din förfrågan. När den är bekräftad är du klar!',
+      title: t('howItWorks.forCompanies.step4.title'),
+      description: t('howItWorks.forCompanies.step4.description'),
       icon: 'CheckCircle'
     }
   ];
 
-const forOwners = [
+  const forOwners = [
     {
       step: 1,
-      title: 'Lista din fastighet',
-      description: 'Skapa en detaljerad listning med foton, bekvämligheter, priser och tillgänglighet.',
+      title: t('howItWorks.forOwners.step1.title'),
+      description: t('howItWorks.forOwners.step1.description'),
       icon: 'Home'
     },
     {
       step: 2,
-      title: 'Ta emot förfrågningar',
-      description: 'Byggföretag kommer att skicka bokningsförfrågningar med sina projektdetaljer och krav.',
+      title: t('howItWorks.forOwners.step2.title'),
+      description: t('howItWorks.forOwners.step2.description'),
       icon: 'Mail'
     },
     {
       step: 3,
-      title: 'Granska och acceptera',
-      description: 'Granska bokningsförfrågningar och acceptera de som fungerar för dig och din fastighet.',
+      title: t('howItWorks.forOwners.step3.title'),
+      description: t('howItWorks.forOwners.step3.description'),
       icon: 'UserCheck'
     },
     {
       step: 4,
-      title: 'Tjäna inkomst',
-      description: 'Var värd för byggarbetare och tjäna konsekvent hyresintäkt från din fastighet.',
+      title: t('howItWorks.forOwners.step4.title'),
+      description: t('howItWorks.forOwners.step4.description'),
       icon: 'DollarSign'
     }
   ];
 
-const benefits = [
+  const benefits = [
     {
-      title: 'För byggföretag',
+      title: t('howItWorks.benefits.forCompanies.title'),
       items: [
-        'Hitta kvalitetsboenden för din arbetsstyrka',
-        'Boka kortsiktiga eller långsiktiga vistelser',
-        'Direkt kommunikation med fastighetsägare',
-        'Flexibla bokningsvillkor',
-        'Verifierade fastighetslistor'
+        t('howItWorks.benefits.forCompanies.benefit1'),
+        t('howItWorks.benefits.forCompanies.benefit2'),
+        t('howItWorks.benefits.forCompanies.benefit3'),
+        t('howItWorks.benefits.forCompanies.benefit4'),
+        t('howItWorks.benefits.forCompanies.benefit5')
       ],
       icon: 'Building2',
       color: 'bg-blue-500'
     },
     {
-      title: 'För fastighetsägare',
+      title: t('howItWorks.benefits.forOwners.title'),
       items: [
-        'Konsekvent hyresintäkt',
-        'Pålitliga byggföretag som hyresgäster',
-        'Flexibel listhantering',
-        'Direkta bokningsförfrågningar',
-        'Professionella affärsrelationer'
+        t('howItWorks.benefits.forOwners.benefit1'),
+        t('howItWorks.benefits.forOwners.benefit2'),
+        t('howItWorks.benefits.forOwners.benefit3'),
+        t('howItWorks.benefits.forOwners.benefit4'),
+        t('howItWorks.benefits.forOwners.benefit5')
       ],
       icon: 'Home',
       color: 'bg-emerald-500'
@@ -109,8 +112,8 @@ const benefits = [
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-{/* Hero Section */}
+<div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
       <section className="bg-neutral-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -118,9 +121,9 @@ const benefits = [
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-<h1 className="text-4xl md:text-5xl font-semibold mb-6">Så fungerar Stay on Site</h1>
+<h1 className="text-4xl md:text-5xl font-semibold mb-6">{t('howItWorks.title')}</h1>
             <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
-              Kopplar samman byggföretag med fastighetsägare för tillfälliga arbetarbostäder
+              {t('howItWorks.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -130,8 +133,8 @@ const benefits = [
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">För byggföretag</h2>
-            <p className="text-lg text-gray-600">Hitta och boka kvalitetsboenden för din arbetsstyrka i 4 enkla steg</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('howItWorks.forCompanies.title')}</h2>
+            <p className="text-lg text-gray-600">{t('howItWorks.forCompanies.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -155,8 +158,8 @@ const benefits = [
           </div>
 
 <div className="text-center mt-12">
-            <Link to="/browse" className="btn-primary">
-              Börja bläddra fastigheter
+<Link to="/browse" className="btn-primary">
+              {t('howItWorks.forCompanies.startBrowsing')}
             </Link>
           </div>
         </div>
@@ -165,9 +168,9 @@ const benefits = [
       {/* For Property Owners */}
       <section className="py-16 bg-gray-50">
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">För fastighetsägare</h2>
-            <p className="text-lg text-gray-600">Lista din fastighet och börja tjäna inkomst i 4 enkla steg</p>
+<div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('howItWorks.forOwners.title')}</h2>
+            <p className="text-lg text-gray-600">{t('howItWorks.forOwners.subtitle')}</p>
           </div>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -192,7 +195,7 @@ const benefits = [
 
 <div className="text-center mt-12">
             <Link to="/create-listing" className="btn-primary">
-              Lista din fastighet
+              {t('howItWorks.forOwners.listProperty')}
             </Link>
           </div>
         </div>
@@ -202,8 +205,8 @@ const benefits = [
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Varför välja Stay on Site?</h2>
-            <p className="text-lg text-gray-600">Fördelar för både fastighetsägare och byggföretag</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('howItWorks.benefits.title')}</h2>
+            <p className="text-lg text-gray-600">{t('howItWorks.benefits.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -239,8 +242,8 @@ const benefits = [
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vanliga frågor</h2>
-            <p className="text-lg text-gray-600">Få svar på vanliga frågor om Stay on Site</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('howItWorks.faq.title')}</h2>
+            <p className="text-lg text-gray-600">{t('howItWorks.faq.subtitle')}</p>
           </div>
 
           <div className="space-y-6">
@@ -269,13 +272,13 @@ const benefits = [
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-<h2 className="text-3xl font-bold text-white mb-6">Redo att komma igång?</h2>
+<h2 className="text-3xl font-bold text-white mb-6">{t('howItWorks.finalCta.title')}</h2>
             <p className="text-xl text-primary-100 mb-8">
-              Gå med Stay on Site idag och lös dina byggbostadsbehov
+              {t('howItWorks.finalCta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-<Link to="/browse" className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
-                Hitta boende
+              <Link to="/browse" className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                {t('howItWorks.finalCta.findAccommodation')}
               </Link>
               <Link to="/create-listing" className="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors">
                 Lista fastighet

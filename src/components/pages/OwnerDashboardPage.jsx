@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
+import { useLanguage } from '@/contexts/LanguageContext';
 import ApperIcon from '@/components/ApperIcon';
 import DashboardStats from '@/components/molecules/DashboardStats';
 import PropertyManagement from '@/components/organisms/PropertyManagement';
@@ -75,10 +76,12 @@ const OwnerDashboardPage = () => {
     occupancyRate: properties.length > 0 ? Math.round((bookings.filter(b => b.status === 'confirmed').length / properties.length) * 100) : 0
   };
 
-const tabs = [
-    { id: 'overview', name: 'Översikt', icon: 'BarChart3' },
-    { id: 'properties', name: 'Mina fastigheter', icon: 'Home' },
-    { id: 'bookings', name: 'Bokningsförfrågningar', icon: 'Calendar' },
+const { t } = useLanguage();
+
+  const tabs = [
+    { id: 'overview', name: t('ownerDashboard.tabs.overview'), icon: 'BarChart3' },
+    { id: 'properties', name: t('ownerDashboard.tabs.properties'), icon: 'Home' },
+    { id: 'bookings', name: t('ownerDashboard.tabs.bookings'), icon: 'Calendar' },
   ];
 
 return (
@@ -87,15 +90,15 @@ return (
         {/* Header */}
 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
           <div>
-            <h1 className="text-3xl font-semibold text-neutral-900">Fastighetsägarinstrumentpanel</h1>
-            <p className="text-neutral-600 mt-2 text-sm">Hantera dina fastigheter och bokningar</p>
+<h1 className="text-3xl font-semibold text-neutral-900">{t('ownerDashboard.title')}</h1>
+            <p className="text-neutral-600 mt-2 text-sm">{t('ownerDashboard.subtitle')}</p>
           </div>
           <Link
             to="/create-listing"
             className="btn-primary flex items-center space-x-2 mt-6 sm:mt-0"
           >
             <ApperIcon name="Plus" className="h-4 w-4" />
-            <span>Lägg till ny fastighet</span>
+<span>{t('ownerDashboard.addProperty')}</span>
           </Link>
         </div>
 
@@ -131,14 +134,14 @@ return (
               <DashboardStats stats={stats} type="owner" />
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Bookings</h3>
+<div className="bg-white rounded-xl p-6 shadow-lg">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('ownerDashboard.recentBookings')}</h3>
                   {bookings.slice(0, 5).map((booking) => {
                     const property = properties.find(p => p.Id === booking.propertyId);
                     return (
                       <div key={booking.Id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
                         <div>
-                          <div className="font-medium text-gray-900">{property?.title || 'Unknown Property'}</div>
+<div className="font-medium text-gray-900">{property?.title || t('ownerDashboard.unknownProperty')}</div>
                           <div className="text-sm text-gray-500">{booking.companyId}</div>
                         </div>
                         <div className="text-right">
@@ -156,7 +159,7 @@ return (
                   })}
                 </div>
 <div className="bg-white rounded-xl p-6 shadow-card border border-neutral-200">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-6">Top Performing Properties</h3>
+<h3 className="text-lg font-medium text-neutral-900 mb-6">{t('ownerDashboard.topPerforming')}</h3>
                   {properties.slice(0, 5).map((property) => (
                     <div key={property.Id} className="flex items-center justify-between py-4 border-b border-neutral-100 last:border-b-0">
                       <div className="flex items-center space-x-3">
@@ -171,8 +174,8 @@ return (
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium text-neutral-900">
-                          {bookings.filter(b => b.propertyId === property.Id).length} bookings
+<div className="text-sm font-medium text-neutral-900">
+                          {bookings.filter(b => b.propertyId === property.Id).length} {t('ownerDashboard.bookings')}
                         </div>
                       </div>
                     </div>

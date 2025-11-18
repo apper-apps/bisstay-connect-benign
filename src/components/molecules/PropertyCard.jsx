@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import React from "react";
+import ApperIcon from "@/components/ApperIcon";
 
 const PropertyCard = ({ property, viewMode = 'grid' }) => {
+  const { t } = useLanguage();
+  
   const getStatusColor = (status) => {
     switch (status) {
       case 'available': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
@@ -13,10 +17,10 @@ const PropertyCard = ({ property, viewMode = 'grid' }) => {
   };
 
   const getStatusText = (status) => {
-switch (status) {
-      case 'available': return 'Tillgänglig';
-      case 'booked': return 'Bokad';
-      case 'pending': return 'Väntande';
+    switch (status) {
+      case 'available': return t('propertyCard.available');
+      case 'booked': return t('propertyCard.booked');
+      case 'pending': return t('propertyCard.pending');
       default: return status;
     }
   };
@@ -56,13 +60,13 @@ switch (status) {
                   <div className="p-1 bg-gray-100 rounded-md mr-2">
                     <ApperIcon name="Bed" className="h-3.5 w-3.5 text-gray-600" />
                   </div>
-                  <span className="text-sm">Upp till {property.capacity} arbetare</span>
+<span className="text-sm">{t('common.upTo')} {property.capacity} {t('common.workers')}</span>
                 </div>
               </div>
               
               <div className="text-right ml-4">
-                <div className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">{property.price} kr</div>
-                <div className="text-sm text-gray-500 font-medium">per natt</div>
+<div className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">{property.price} kr</div>
+                <div className="text-sm text-gray-500 font-medium">{t('common.perNight')}</div>
               </div>
             </div>
 
@@ -73,7 +77,7 @@ switch (status) {
                 <ApperIcon name="Wifi" className="h-3 w-3 mr-1" />
                 <span>WiFi</span>
               </div>
-              {property.amenities.slice(0, 3).map((amenity, index) => (
+{property.amenities.slice(0, 3).map((amenity, index) => (
                 <span
                   key={index}
                   className="px-3 py-1.5 bg-gray-50 text-gray-700 text-xs rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
@@ -83,7 +87,7 @@ switch (status) {
               ))}
               {property.amenities.length > 3 && (
                 <span className="px-3 py-1.5 bg-gray-50 text-gray-700 text-xs rounded-full border border-gray-200">
-                  +{property.amenities.length - 3} more
+                  +{property.amenities.length - 3} {t('common.more')}
                 </span>
               )}
             </div>
@@ -101,8 +105,8 @@ switch (status) {
               <Link
                 to={`/property/${property.Id}`}
                 className="btn-primary transform hover:scale-105 transition-transform"
-              >
-                Visa detaljer
+>
+                {t('common.viewDetails')}
               </Link>
             </div>
           </div>
@@ -139,8 +143,8 @@ switch (status) {
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-lg font-semibold text-gray-900 flex-1 mr-4 group-hover:text-primary-700 transition-colors">{property.title}</h3>
           <div className="text-right">
-            <div className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">{property.price_c || property.price} kr</div>
-            <div className="text-xs text-gray-500 font-medium">per natt</div>
+<div className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">{property.price_c || property.price} kr</div>
+            <div className="text-xs text-gray-500 font-medium">{t('common.perNight')}</div>
           </div>
         </div>
         
@@ -155,7 +159,7 @@ switch (status) {
           <div className="p-1 bg-gray-100 rounded-md mr-2">
             <ApperIcon name="Bed" className="h-3.5 w-3.5 text-gray-600" />
           </div>
-          <span className="text-sm">Upp till {property.capacity} arbetare</span>
+<span className="text-sm">{t('common.upTo')} {property.capacity} {t('common.workers')}</span>
         </div>
 
         <div className="flex flex-wrap gap-1.5 mb-5">
@@ -189,8 +193,8 @@ switch (status) {
           <Link
             to={`/property/${property.Id}`}
             className="btn-primary text-sm px-4 py-2 transform hover:scale-105 transition-transform"
-          >
-            Visa detaljer
+>
+            {t('common.viewDetails')}
           </Link>
         </div>
       </div>

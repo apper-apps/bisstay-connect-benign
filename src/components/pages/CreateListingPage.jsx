@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { propertyService } from "@/services/api/propertyService";
 import ApperIcon from "@/components/ApperIcon";
 
 const CreateListingPage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   
@@ -22,35 +24,35 @@ const CreateListingPage = () => {
     contactEmail: '',
     contactPhone: ''
   });
-
-const steps = [
-    { id: 1, name: 'Grundinfo', icon: 'Home' },
-    { id: 2, name: 'Detaljer', icon: 'FileText' },
-    { id: 3, name: 'Bekvämligheter', icon: 'Star' },
-    { id: 4, name: 'Foton', icon: 'Camera' },
-    { id: 5, name: 'Kontakt', icon: 'Phone' }
+  
+  const steps = [
+    { id: 1, name: t('createListing.steps.basicInfo'), icon: 'Home' },
+    { id: 2, name: t('createListing.steps.details'), icon: 'FileText' },
+    { id: 3, name: t('createListing.steps.amenities'), icon: 'Star' },
+    { id: 4, name: t('createListing.steps.photos'), icon: 'Camera' },
+    { id: 5, name: t('createListing.steps.contact'), icon: 'Phone' }
   ];
 
-const propertyTypes = [
-    { id: 'house', name: 'Hus', icon: 'Home' },
-    { id: 'apartment', name: 'Lägenhet', icon: 'Building' },
-    { id: 'dormitory', name: 'Sovsal', icon: 'Building2' },
-    { id: 'trailer', name: 'Husvagn', icon: 'Truck' },
+  const propertyTypes = [
+    { id: 'house', name: t('createListing.propertyTypes.house'), icon: 'Home' },
+    { id: 'apartment', name: t('createListing.propertyTypes.apartment'), icon: 'Building' },
+    { id: 'dormitory', name: t('createListing.propertyTypes.dormitory'), icon: 'Building2' },
+    { id: 'trailer', name: t('createListing.propertyTypes.trailer'), icon: 'Truck' },
   ];
 
-const amenities = [
-    { id: 'wifi', name: 'WiFi', icon: 'Wifi' },
-    { id: 'parking', name: 'Parkering', icon: 'Car' },
-    { id: 'kitchen', name: 'Kök', icon: 'ChefHat' },
-    { id: 'laundry', name: 'Tvättstuga', icon: 'Shirt' },
-    { id: 'ac', name: 'Luftkonditionering', icon: 'Snowflake' },
-    { id: 'heating', name: 'Uppvärmning', icon: 'Flame' },
-    { id: 'furnished', name: 'Möblerad', icon: 'Armchair' },
-    { id: 'utilities', name: 'Avgifter inkluderade', icon: 'Zap' },
-    { id: 'gym', name: 'Gym/Fitness', icon: 'Dumbbell' },
-    { id: 'pool', name: 'Pool', icon: 'Waves' },
-    { id: 'security', name: 'Säkerhet', icon: 'Shield' },
-    { id: 'cleaning', name: 'Städservice', icon: 'Sparkles' },
+  const amenities = [
+    { id: 'wifi', name: t('createListing.amenitiesList.wifi'), icon: 'Wifi' },
+    { id: 'parking', name: t('createListing.amenitiesList.parking'), icon: 'Car' },
+    { id: 'kitchen', name: t('createListing.amenitiesList.kitchen'), icon: 'ChefHat' },
+    { id: 'laundry', name: t('createListing.amenitiesList.laundry'), icon: 'Shirt' },
+    { id: 'ac', name: t('createListing.amenitiesList.ac'), icon: 'Snowflake' },
+    { id: 'heating', name: t('createListing.amenitiesList.heating'), icon: 'Flame' },
+    { id: 'furnished', name: t('createListing.amenitiesList.furnished'), icon: 'Armchair' },
+    { id: 'utilities', name: t('createListing.amenitiesList.utilities'), icon: 'Zap' },
+    { id: 'gym', name: t('createListing.amenitiesList.gym'), icon: 'Dumbbell' },
+    { id: 'pool', name: t('createListing.amenitiesList.pool'), icon: 'Waves' },
+    { id: 'security', name: t('createListing.amenitiesList.security'), icon: 'Shield' },
+    { id: 'cleaning', name: t('createListing.amenitiesList.cleaning'), icon: 'Sparkles' },
   ];
 
   const handleInputChange = (field, value) => {
@@ -129,8 +131,8 @@ return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
 <div className="text-center mb-12">
-          <h1 className="text-3xl font-semibold text-neutral-900 mb-3">Lista din fastighet</h1>
-          <p className="text-neutral-600 text-sm">Skapa en listning för byggarbetarbostäder</p>
+<h1 className="text-3xl font-semibold text-neutral-900 mb-3">{t('createListing.title')}</h1>
+          <p className="text-neutral-600 text-sm">{t('createListing.subtitle')}</p>
         </div>
 
         {/* Progress Steps */}
@@ -169,10 +171,10 @@ return (
             {/* Step 1: Basic Info */}
             {currentStep === 1 && (
 <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Grundläggande information</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">{t('createListing.form.basicInfo.title')}</h2>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Fastighetstitel</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.basicInfo.propertyTitle')}</label>
                   <input
                     type="text"
                     value={formData.title}
@@ -184,7 +186,7 @@ onChange={(e) => handleInputChange('title', e.target.value)}
                 </div>
 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Adress</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.basicInfo.address')}</label>
                   <input
                     type="text"
                     value={formData.address}
@@ -196,7 +198,7 @@ className="input-field"
                 </div>
 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Pris per natt (kr)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.basicInfo.pricePerNight')}</label>
                   <input
                     type="number"
                     value={formData.price}
@@ -214,10 +216,10 @@ className="input-field"
             {/* Step 2: Details */}
             {currentStep === 2 && (
 <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Fastighetsdetaljer</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">{t('createListing.form.details.title')}</h2>
                 
-<div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Beskrivning</label>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.details.description')}</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
@@ -229,7 +231,7 @@ className="input-field"
                 </div>
 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Fastighetstyp</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">{t('createListing.form.details.propertyType')}</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {propertyTypes.map((type) => (
                       <button
@@ -250,7 +252,7 @@ className="input-field"
                 </div>
 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Maximal kapacitet</label>
+<label className="block text-sm font-medium text-gray-700 mb-3">{t('createListing.form.details.maxCapacity')}</label>
                   <div className="flex items-center space-x-4">
                     <button
                       type="button"
@@ -267,7 +269,7 @@ className="input-field"
                     >
                       <ApperIcon name="Plus" className="h-4 w-4" />
 </button>
-                    <span className="text-gray-600">arbetare</span>
+<span className="text-gray-600">{t('common.workers')}</span>
                   </div>
                 </div>
               </div>
@@ -275,10 +277,9 @@ className="input-field"
 
             {/* Step 3: Amenities */}
 {currentStep === 3 && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Bekvämligheter</h2>
-                <p className="text-gray-600 mb-6">Välj alla bekvämligheter som gäller för din fastighet</p>
-                
+<div className="space-y-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">{t('createListing.form.amenities.title')}</h2>
+                <p className="text-gray-600 mb-6">{t('createListing.form.amenities.subtitle')}</p>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {amenities.map((amenity) => (
                     <label
@@ -306,13 +307,13 @@ className="input-field"
             {/* Step 4: Photos */}
 {currentStep === 4 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Foton</h2>
-                <p className="text-gray-600 mb-6">Lägg till foton av din fastighet (valfritt - exempelfoton kommer att användas om inga tillhandahålls)</p>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">{t('createListing.form.photos.title')}</h2>
+                <p className="text-gray-600 mb-6">{t('createListing.form.photos.subtitle')}</p>
                 
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
 <ApperIcon name="Camera" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Ladda upp foton</h3>
-                  <p className="text-gray-600 mb-4">Dra och släpp dina foton här, eller klicka för att bläddra</p>
+<h3 className="text-lg font-medium text-gray-900 mb-2">{t('createListing.form.photos.upload')}</h3>
+                  <p className="text-gray-600 mb-4">{t('createListing.form.photos.dragDrop')}</p>
                   <button
                     type="button"
                     className="btn-outline"
@@ -322,12 +323,12 @@ className="input-field"
                 </div>
                 
 <div className="text-sm text-gray-500">
-                  <p>Tips för bra foton:</p>
+                  <p>{t('createListing.form.photos.tips.title')}</p>
                   <ul className="list-disc list-inside mt-2 space-y-1">
-                    <li>Ta foton i bra belysning</li>
-                    <li>Visa alla rum och gemensamma utrymmen</li>
-                    <li>Inkludera exteriörbilder</li>
-                    <li>Framhäv viktiga bekvämligheter</li>
+                    <li>{t('createListing.form.photos.tips.lighting')}</li>
+                    <li>{t('createListing.form.photos.tips.allRooms')}</li>
+                    <li>{t('createListing.form.photos.tips.exterior')}</li>
+                    <li>{t('createListing.form.photos.tips.amenities')}</li>
                   </ul>
                 </div>
               </div>
@@ -339,7 +340,7 @@ className="input-field"
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">Kontaktinformation</h2>
                 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">E-postadress</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.contact.email')}</label>
                   <input
                     type="email"
                     value={formData.contactEmail}
@@ -351,7 +352,7 @@ className="input-field"
                 </div>
 
 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Telefonnummer</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('createListing.form.contact.phone')}</label>
                   <input
                     type="tel"
                     value={formData.contactPhone}
@@ -365,8 +366,8 @@ className="input-field"
                   <div className="flex items-start">
                     <ApperIcon name="Info" className="h-5 w-5 text-amber-600 mt-0.5 mr-3" />
 <div className="text-sm text-amber-800">
-                      <p className="font-medium mb-1">Granska din listning</p>
-                      <p>Kontrollera all information innan du skickar in. Du kan redigera din listning efter att den publicerats.</p>
+                      <p className="font-medium mb-1">{t('createListing.form.contact.reviewNote')}</p>
+                      <p>{t('createListing.form.contact.reviewDescription')}</p>
                     </div>
                   </div>
                 </div>
@@ -381,8 +382,8 @@ className="input-field"
                 onClick={prevStep}
                 disabled={currentStep === 1}
                 className="btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Föregående
+>
+                {t('common.previous')}
               </button>
               
               {currentStep < steps.length ? (
@@ -391,8 +392,8 @@ className="input-field"
                   onClick={nextStep}
                   disabled={!canProceed()}
                   className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Nästa
+>
+                  {t('common.next')}
                 </button>
               ) : (
                 <button
@@ -402,13 +403,13 @@ className="input-field"
                 >
                   {loading ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Skapar listning...</span>
+<div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>{t('createListing.form.creating')}</span>
                     </>
                   ) : (
                     <>
                       <ApperIcon name="Check" className="h-4 w-4" />
-                      <span>Publicera listning</span>
+                      <span>{t('createListing.form.publish')}</span>
                     </>
                   )}
 </button>

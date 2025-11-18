@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ApperIcon from "@/components/ApperIcon";
 import SearchBar from "@/components/molecules/SearchBar";
 
@@ -21,48 +22,50 @@ const HomePage = () => {
     if (searchFilters.guests > 1) params.append('guests', searchFilters.guests);
     
     navigate(`/browse?${params.toString()}`);
-  };
+};
 
-const features = [
+  const { t } = useLanguage();
+
+  const features = [
     {
       icon: 'MapPin',
-      title: 'Hitta perfekt boende',
-      description: 'Sök och filtrera fastigheter efter plats, kapacitet, bekvämligheter och budget för att hitta idealiska arbetarboenden.'
+      title: t('home.features.findAccommodation.title'),
+      description: t('home.features.findAccommodation.description')
     },
     {
       icon: 'Shield',
-      title: 'Verifierade fastigheter',
-      description: 'Alla fastigheter är verifierade och uppfyller säkerhetsstandarder för byggarbetarbostäder.'
+      title: t('home.features.verified.title'),
+      description: t('home.features.verified.description')
     },
-{
+    {
       icon: 'Users',
-      title: 'Flexibel bokning',
-      description: 'Boka för kortsiktiga projekt eller långsiktiga kontrakt med enkel datumhantering och tillgänglighetsspårning.'
+      title: t('home.features.flexible.title'),
+      description: t('home.features.flexible.description')
     },
     {
       icon: 'MessageCircle',
-      title: 'Direkt kommunikation',
-      description: 'Kommunicera direkt med fastighetsägare för att diskutera specifika behov, gruppbokningar och särskilda arrangemang.'
+      title: t('home.features.communication.title'),
+      description: t('home.features.communication.description')
     }
   ];
 
 const steps = [
     {
       step: '01',
-      title: 'Välj din roll',
-      description: 'Välj om du är ett byggföretag som söker boende eller en fastighetsägare som vill lista din fastighet.',
+      title: t('home.howItWorks.step1.title'),
+      description: t('home.howItWorks.step1.description'),
       icon: 'UserCheck'
     },
     {
       step: '02',
-      title: 'Sök eller lista',
-      description: 'Företag kan söka efter lämpliga fastigheter medan ägare kan skapa detaljerade listor med foton och bekvämligheter.',
+      title: t('home.howItWorks.step2.title'),
+      description: t('home.howItWorks.step2.description'),
       icon: 'Search'
     },
     {
       step: '03',
-      title: 'Anslut och boka',
-      description: 'Skicka bokningsförfrågningar, kommunicera direkt och slutför arrangemang som fungerar för båda parter.',
+      title: t('home.howItWorks.step3.title'),
+      description: t('home.howItWorks.step3.description'),
       icon: 'Handshake'
     }
   ];
@@ -76,12 +79,12 @@ return (
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-semibold text-neutral-900 mb-8 leading-tight"
->
-              Byggarbetarboenden
-              <span className="block gradient-text">Enkelt gjort</span>
+            >
+              {t('home.hero.title')}
+              <span className="block gradient-text">{t('home.hero.subtitle')}</span>
             </motion.h1>
             
             <motion.p
@@ -90,8 +93,7 @@ return (
               transition={{ delay: 0.2 }}
               className="text-lg text-neutral-600 max-w-3xl mx-auto mb-12"
             >
-              Koppla samman fastighetsägare med byggföretag. Hitta kvalitetsboenden för tillfällig 
-              inkvartering av din arbetsstyrka eller lista dina fastigheter för pålitlig hyresintäkt.
+              {t('home.hero.description')}
             </motion.p>
           </div>
 
@@ -118,11 +120,11 @@ return (
           >
 <Link to="/browse" className="btn-primary flex items-center space-x-2">
               <ApperIcon name="Search" className="h-4 w-4" />
-              <span>Bläddra fastigheter</span>
+              <span>{t('home.hero.browseProperties')}</span>
             </Link>
             <Link to="/create-listing" className="btn-secondary flex items-center space-x-2">
               <ApperIcon name="Plus" className="h-4 w-4" />
-              <span>Lista din fastighet</span>
+              <span>{t('home.hero.listProperty')}</span>
             </Link>
           </motion.div>
         </div>
@@ -133,10 +135,10 @@ return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
 <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-6">
-              Varför välja Stay on Site?
+              {t('home.features.title')}
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Strömlinjeformad plattform designad specifikt för byggindustrins bostadsbehov
+              {t('home.features.subtitle')}
             </p>
           </div>
 
@@ -171,11 +173,11 @@ return (
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
-                Så fungerar det
+<h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+                {t('home.howItWorks.title')}
               </h2>
               <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
-                Kom igång med vår plattform i tre enkla steg och hitta perfekta boendelösningar för ditt byggprojekt
+                {t('home.howItWorks.subtitle')}
               </p>
             </motion.div>
           </div>
@@ -231,21 +233,21 @@ return (
             className="text-center mt-16"
           >
             <div className="bg-gradient-to-r from-primary-600 to-accent-500 rounded-2xl p-8 text-white shadow-elevated">
-              <h3 className="text-2xl font-bold mb-4">Redo att komma igång?</h3>
+<h3 className="text-2xl font-bold mb-4">{t('home.cta.ready')}</h3>
               <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
-                Gå med i tusentals byggföretag och fastighetsägare som redan använder vår plattform för att förenkla sina boendelösningar.
+                {t('home.cta.description')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-neutral-50 transition-colors duration-200 shadow-md hover:shadow-lg">
                   <span className="flex items-center gap-2">
                     <ApperIcon name="Building2" className="h-5 w-5" />
-                    Jag är ett byggföretag
+                    {t('home.cta.company')}
                   </span>
                 </button>
                 <button className="bg-accent-400 text-white px-8 py-3 rounded-lg font-semibold hover:bg-accent-500 transition-colors duration-200 shadow-md hover:shadow-lg">
                   <span className="flex items-center gap-2">
                     <ApperIcon name="Home" className="h-5 w-5" />
-                    Jag är fastighetsägare
+                    {t('home.cta.owner')}
                   </span>
                 </button>
               </div>
@@ -263,23 +265,23 @@ return (
             viewport={{ once: true }}
           >
 <h2 className="text-3xl md:text-4xl font-semibold text-white mb-8">
-              Redo att komma igång?
+              {t('home.finalCta.title')}
             </h2>
             <p className="text-lg text-neutral-300 mb-12">
-              Gå med tusentals byggföretag och fastighetsägare som redan använder Stay on Site
+              {t('home.finalCta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 to="/browse" 
                 className="bg-white text-neutral-900 px-8 py-3 rounded-lg font-medium hover:bg-neutral-50 transition-colors"
               >
-                Hitta boende nu
+                {t('home.finalCta.findAccommodation')}
               </Link>
               <Link 
                 to="/create-listing" 
                 className="bg-accent-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-accent-600 transition-colors"
               >
-                Lista din fastighet
+                {t('home.finalCta.listProperty')}
               </Link>
             </div>
           </motion.div>

@@ -9,7 +9,7 @@ import BookingWidget from "@/components/molecules/BookingWidget";
 import ImageCarousel from "@/components/molecules/ImageCarousel";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
-
+import { useLanguage } from "@/contexts/LanguageContext";
 const PropertyDetailPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
@@ -34,7 +34,9 @@ const PropertyDetailPage = () => {
     loadProperty();
   }, [id]);
 
-const handleBookingRequest = async (bookingData) => {
+const { t } = useLanguage();
+
+  const handleBookingRequest = async (bookingData) => {
     try {
       setBookingLoading(true);
       await bookingService.create({
@@ -42,9 +44,9 @@ const handleBookingRequest = async (bookingData) => {
         propertyId: property.Id,
         status: 'pending'
       });
-      toast.success('Bokningsförfrågan skickad! Fastighetsägaren kommer att kontakta dig snart.');
+      toast.success(t('property.bookingSuccess'));
     } catch (err) {
-      toast.error('Misslyckades att skicka bokningsförfrågan. Försök igen.');
+      toast.error(t('property.bookingError'));
     } finally {
       setBookingLoading(false);
     }
@@ -52,7 +54,7 @@ const handleBookingRequest = async (bookingData) => {
 
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadProperty} />;
-  if (!property) return <Error message="Property not found" />;
+if (!property) return <Error message={t('property.notFound')} />;
 
   const amenityIcons = {
     'wifi': 'Wifi',
@@ -94,7 +96,7 @@ return (
                 <div className="flex items-center space-x-6 text-sm text-neutral-600">
                   <div className="flex items-center">
 <ApperIcon name="Users" className="h-4 w-4 mr-1" />
-                    <span>Upp till {property.capacity} arbetare</span>
+                    <span>{t('common.upTo')} {property.capacity} {t('common.workers')}</span>
                   </div>
                   <div className="flex items-center">
                     <ApperIcon name="Home" className="h-4 w-4 mr-1" />
@@ -105,7 +107,7 @@ return (
               
               <div className="text-right lg:text-left">
 <div className="text-2xl font-semibold text-neutral-900">{property.price_c || property.price} kr</div>
-                <div className="text-neutral-500 text-sm">per natt</div>
+                <div className="text-neutral-500 text-sm">{t('common.perNight')}</div>
               </div>
             </div>
           </div>
@@ -118,13 +120,13 @@ return (
 
               {/* Description */}
               <div>
-<h2 className="text-2xl font-semibold text-gray-900 mb-4">Om denna fastighet</h2>
+<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('property.aboutProperty')}</h2>
                 <p className="text-gray-600 leading-relaxed">{property.description}</p>
               </div>
 
 {/* Amenities */}
-              <div>
-<h2 className="text-xl font-medium text-neutral-900 mb-6">Bekvämligheter</h2>
+<div>
+                <h2 className="text-xl font-medium text-neutral-900 mb-6">{t('property.amenities')}</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {property.amenities.map((amenity, index) => (
                     <div
@@ -141,8 +143,8 @@ return (
               </div>
 
               {/* Location */}
-              <div>
-<h2 className="text-2xl font-semibold text-gray-900 mb-4">Plats</h2>
+<div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('property.location')}</h2>
                 <div className="bg-gray-100 rounded-lg p-8 text-center">
                   <ApperIcon name="MapPin" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
 <p className="text-gray-600">Interaktiv karta kommer snart</p>
