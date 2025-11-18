@@ -41,7 +41,7 @@ const createUserIcon = () => {
 };
 
 // Component to handle map view updates
-const MapViewController = ({ center, zoom }) => {
+const MapViewController = ({ center, zoom, onMapClick }) => {
   const map = useMap();
   
   useEffect(() => {
@@ -49,6 +49,20 @@ const MapViewController = ({ center, zoom }) => {
       map.setView(center, zoom);
     }
   }, [center, zoom, map]);
+
+  useEffect(() => {
+    if (onMapClick) {
+      const handleMapClick = (e) => {
+        onMapClick(e.latlng);
+      };
+      
+      map.on('click', handleMapClick);
+      
+      return () => {
+        map.off('click', handleMapClick);
+      };
+    }
+  }, [map, onMapClick]);
   
   return null;
 };
@@ -133,19 +147,37 @@ const MapView = ({
 }) => {
   const [mapCenter, setMapCenter] = useState([59.3293, 18.0686]); // Default to Stockholm
   const [mapZoom, setMapZoom] = useState(10);
-  const mapRef = useRef(null);
+const mapRef = useRef(null);
 
-  useEffect(() => {
+  // Handle map click for location selection
+  const handleMapClick = (latlng) => {
+    const coords = {
+      lat: latlng.lat,
+      lng: latlng.lng,
+      name: 'Vald plats'
+    };
+    setMapCenter([coords.lat, coords.lng]);
+    if (onLocationChange) {
+      onLocationChange(coords);
+    }
+  };
+
+useEffect(() => {
     if (userLocation) {
       setMapCenter([userLocation.lat, userLocation.lng]);
       setMapZoom(12);
     } else if (properties.length > 0) {
-      // Center map on properties
-      const bounds = properties.map(p => [p.coordinates.lat, p.coordinates.lng]);
-      const centerLat = bounds.reduce((sum, coord) => sum + coord[0], 0) / bounds.length;
-      const centerLng = bounds.reduce((sum, coord) => sum + coord[1], 0) / bounds.length;
-      setMapCenter([centerLat, centerLng]);
-      setMapZoom(10);
+      // Center map on properties with better bounds calculation
+      const validCoordinates = properties
+        .filter(p => p.coordinates && p.coordinates.lat && p.coordinates.lng)
+        .map(p => [p.coordinates.lat, p.coordinates.lng]);
+      
+      if (validCoordinates.length > 0) {
+        const centerLat = validCoordinates.reduce((sum, coord) => sum + coord[0], 0) / validCoordinates.length;
+        const centerLng = validCoordinates.reduce((sum, coord) => sum + coord[1], 0) / validCoordinates.length;
+        setMapCenter([centerLat, centerLng]);
+        setMapZoom(10);
+      }
     }
   }, [userLocation, properties]);
 
@@ -166,17 +198,25 @@ const MapView = ({
     <div className="relative h-96 md:h-[600px] w-full">
       <MapContainer
         ref={mapRef}
-        center={mapCenter}
+center={mapCenter}
         zoom={mapZoom}
         className="h-full w-full"
         zoomControl={false}
+        scrollWheelZoom={true}
+        doubleClickZoom={true}
+        dragging={true}
+        touchZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        <MapViewController center={mapCenter} zoom={mapZoom} />
+<MapViewController 
+          center={mapCenter} 
+          zoom={mapZoom} 
+          onMapClick={handleMapClick}
+        />
         
         {/* User location marker and radius circle */}
         {userLocation && (
@@ -256,8 +296,37 @@ const MapView = ({
         onRadiusChange={onRadiusChange}
       />
 
-      {/* Map controls */}
+{/* Map controls */}
       <div className="absolute bottom-4 right-4 z-[1000] flex flex-col gap-2">
+        {/* Zoom In Button */}
+        <button
+          onClick={() => {
+            if (mapRef.current) {
+              const newZoom = Math.min(mapZoom + 1, 18);
+              setMapZoom(newZoom);
+            }
+          }}
+          className="bg-white p-2 rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+          title="Zooma in"
+        >
+          <ApperIcon name="Plus" className="h-5 w-5 text-gray-600" />
+        </button>
+
+        {/* Zoom Out Button */}
+        <button
+          onClick={() => {
+            if (mapRef.current) {
+              const newZoom = Math.max(mapZoom - 1, 1);
+              setMapZoom(newZoom);
+            }
+          }}
+          className="bg-white p-2 rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+          title="Zooma ut"
+        >
+          <ApperIcon name="Minus" className="h-5 w-5 text-gray-600" />
+        </button>
+
+        {/* Find My Location Button */}
         <button
           onClick={() => {
             if (navigator.geolocation) {
@@ -276,8 +345,23 @@ const MapView = ({
                 },
                 (error) => {
                   console.error('Geolocation error:', error);
+                  // Show user-friendly error message
+                  if (error.code === error.PERMISSION_DENIED) {
+                    alert('Tillgång till plats nekad. Aktivera platsåtkomst i webbläsarinställningarna.');
+                  } else if (error.code === error.POSITION_UNAVAILABLE) {
+                    alert('Din plats kunde inte hittas.');
+                  } else {
+                    alert('Fel vid hämtning av plats.');
+                  }
+                },
+                { 
+                  enableHighAccuracy: true,
+                  timeout: 10000,
+                  maximumAge: 60000 
                 }
               );
+            } else {
+              alert('Geolocation stöds inte av din webbläsare.');
             }
           }}
           className="bg-white p-2 rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
