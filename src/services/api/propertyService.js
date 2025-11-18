@@ -42,20 +42,31 @@ export const propertyService = {
       }
 
       // Transform database fields to match UI expectations
+// Helper function to safely parse JSON with fallback
+      const safeJsonParse = (jsonString, fallback) => {
+        if (!jsonString || typeof jsonString !== 'string') return fallback;
+        try {
+          return JSON.parse(jsonString);
+        } catch (error) {
+          console.warn('Failed to parse JSON:', jsonString, error.message);
+          return fallback;
+        }
+      };
+
       return response.data.map(property => ({
         Id: property.Id,
         ownerId: property.ownerId_c || 'unknown',
         title: property.title_c || property.Name || 'Untitled Property',
         description: property.description_c || '',
         address: property.address_c || '',
-        coordinates: property.coordinates_c ? JSON.parse(property.coordinates_c) : { lat: 59.3293, lng: 18.0686 },
+        coordinates: safeJsonParse(property.coordinates_c, { lat: 59.3293, lng: 18.0686 }),
         price: property.price_c || 0,
         capacity: property.capacity_c || 1,
         amenities: property.amenities_c ? property.amenities_c.split(',') : [],
-        images: property.images_c ? JSON.parse(property.images_c) : [
+        images: safeJsonParse(property.images_c, [
           'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800'
-        ],
-        availability: property.availability_c ? JSON.parse(property.availability_c) : [],
+        ]),
+        availability: safeJsonParse(property.availability_c, []),
         propertyType: property.propertyType_c || 'hus',
         createdAt: property.CreatedOn,
         status: property.status_c || 'active'
@@ -101,6 +112,17 @@ export const propertyService = {
       }
 
       // Transform database fields to match UI expectations
+// Helper function to safely parse JSON with fallback
+      const safeJsonParse = (jsonString, fallback) => {
+        if (!jsonString || typeof jsonString !== 'string') return fallback;
+        try {
+          return JSON.parse(jsonString);
+        } catch (error) {
+          console.warn('Failed to parse JSON:', jsonString, error.message);
+          return fallback;
+        }
+      };
+
       const property = response.data;
       return {
         Id: property.Id,
@@ -108,14 +130,14 @@ export const propertyService = {
         title: property.title_c || property.Name || 'Untitled Property',
         description: property.description_c || '',
         address: property.address_c || '',
-        coordinates: property.coordinates_c ? JSON.parse(property.coordinates_c) : { lat: 59.3293, lng: 18.0686 },
+        coordinates: safeJsonParse(property.coordinates_c, { lat: 59.3293, lng: 18.0686 }),
         price: property.price_c || 0,
         capacity: property.capacity_c || 1,
         amenities: property.amenities_c ? property.amenities_c.split(',') : [],
-        images: property.images_c ? JSON.parse(property.images_c) : [
+        images: safeJsonParse(property.images_c, [
           'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800'
-        ],
-        availability: property.availability_c ? JSON.parse(property.availability_c) : [],
+        ]),
+        availability: safeJsonParse(property.availability_c, []),
         propertyType: property.propertyType_c || 'hus',
         createdAt: property.CreatedOn,
         status: property.status_c || 'active'
