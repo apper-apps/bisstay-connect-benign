@@ -19,6 +19,7 @@ const BrowsePropertiesPage = () => {
   const [error, setError] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
+  const { t } = useLanguage();
   
   const [searchFilters, setSearchFilters] = useState({
     location: searchParams.get('location') || '',
@@ -103,10 +104,8 @@ const BrowsePropertiesPage = () => {
     applyFilters();
   };
 
-  if (loading) return <Loading type="properties" />;
+if (loading) return <Loading type="properties" />;
   if (error) return <Error message={error} onRetry={loadProperties} />;
-
-const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-gray-50">

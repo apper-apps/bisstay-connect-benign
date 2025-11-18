@@ -17,7 +17,7 @@ const CompanyDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
-
+  const { t } = useLanguage();
   const loadData = async () => {
     try {
       setLoading(true);
@@ -39,7 +39,7 @@ const CompanyDashboardPage = () => {
     loadData();
   }, []);
 
-  if (loading) return <Loading type="dashboard" />;
+if (loading) return <Loading type="dashboard" />;
   if (error) return <Error message={error} onRetry={loadData} />;
 
   const stats = {
@@ -49,8 +49,6 @@ const CompanyDashboardPage = () => {
     savedProperties: Math.floor(Math.random() * 12) + 3, // Mock saved properties
     monthlySpend: bookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + b.totalPrice, 0)
   };
-
-const { t } = useLanguage();
 
   const tabs = [
     { id: 'overview', name: t('companyDashboard.tabs.overview'), icon: 'BarChart3' },

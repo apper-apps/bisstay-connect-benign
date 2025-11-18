@@ -18,7 +18,7 @@ const OwnerDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
-
+  const { t } = useLanguage();
   const loadData = async () => {
     try {
       setLoading(true);
@@ -64,7 +64,7 @@ const OwnerDashboardPage = () => {
     }
   };
 
-  if (loading) return <Loading type="dashboard" />;
+if (loading) return <Loading type="dashboard" />;
   if (error) return <Error message={error} onRetry={loadData} />;
 
   const stats = {
@@ -75,8 +75,6 @@ const OwnerDashboardPage = () => {
     monthlyRevenue: bookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + b.totalPrice, 0),
     occupancyRate: properties.length > 0 ? Math.round((bookings.filter(b => b.status === 'confirmed').length / properties.length) * 100) : 0
   };
-
-const { t } = useLanguage();
 
   const tabs = [
     { id: 'overview', name: t('ownerDashboard.tabs.overview'), icon: 'BarChart3' },
