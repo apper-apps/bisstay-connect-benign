@@ -100,4 +100,3 @@ const PropertyManagement = ({ properties, onDelete }) => {
 };
 
 export default PropertyManagement;
-<div className="text-xs text-neutral-500">{property.price_c || property.price} kr/natt</div>
