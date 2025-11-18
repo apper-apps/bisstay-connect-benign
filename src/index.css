@@ -11,10 +11,10 @@
   }
   
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     line-height: 1.5;
-    color: #1f2937;
-    background-color: #ffffff;
+    color: #334155;
+    background-color: #f8fafc;
     font-feature-settings: 'kern' 1, 'liga' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -22,36 +22,36 @@ body {
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 600;
+font-weight: 600;
     line-height: 1.25;
-    color: #111827;
+    color: #1e293b;
     letter-spacing: -0.025em;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-neutral-900 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-neutral-800 transition-colors duration-200 shadow-subtle hover:shadow-card;
+.btn-primary {
+    @apply bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200 shadow-subtle hover:shadow-card;
   }
   
   .btn-secondary {
     @apply bg-accent-500 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-accent-600 transition-colors duration-200 shadow-subtle hover:shadow-card;
   }
   
-  .btn-outline {
-    @apply border border-neutral-300 text-neutral-700 px-6 py-2.5 rounded-lg font-medium hover:bg-neutral-50 hover:border-neutral-400 transition-colors duration-200;
+.btn-outline {
+    @apply border border-neutral-300 text-neutral-700 px-6 py-2.5 rounded-lg font-medium hover:bg-neutral-50 hover:border-primary-300 transition-colors duration-200;
   }
   
 .card {
     @apply bg-white rounded-xl shadow-subtle hover:shadow-card transition-shadow duration-200 border border-neutral-200;
   }
   
-  .input-field {
-    @apply w-full px-4 py-2.5 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors duration-200 bg-white text-sm;
+.input-field {
+    @apply w-full px-4 py-2.5 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 bg-white text-sm;
   }
   
-  .gradient-text {
-    @apply bg-gradient-to-r from-neutral-900 to-accent-600 bg-clip-text text-transparent;
+.gradient-text {
+    @apply bg-gradient-to-r from-primary-700 to-accent-600 bg-clip-text text-transparent;
   }
 }
 
@@ -69,7 +69,7 @@ body {
 }
 
 .Toastify__toast--success {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
 .Toastify__toast--error {
@@ -77,7 +77,7 @@ body {
 }
 
 .Toastify__toast--info {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
 }
 
 .Toastify__toast--warning {
@@ -91,7 +91,7 @@ body {
 /* Shimmer effect for loading states */
 .shimmer {
   position: relative;
-  overflow: hidden;
+overflow: hidden;
   background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
