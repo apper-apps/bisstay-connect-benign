@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import Layout from "@/components/organisms/Layout";
-import Root from "@/components/organisms/Root";
+import Root from "@/layouts/Root";
 import { authRoutes } from "@/router/authRoutes";
 
 // Lazy load all page components
