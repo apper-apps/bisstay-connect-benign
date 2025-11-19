@@ -30,97 +30,114 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// Wrap components with Suspense
-const withSuspense = (Component) => (
-  <Suspense fallback={<LoadingSpinner />}>
-    <Component />
-  </Suspense>
-);
-
-// Create route helper function
-const createRoute = (config) => ({
-  path: config.path,
-  element: withSuspense(config.component || (() => config.element)),
-  ...getRouteConfig(config.path)
-});
+// createRoute helper
+const createRoute = ({ path, index, element, access, children, ...meta }) => {
+  const configPath = index ? "/" : (path?.startsWith('/') ? path : `/${path}`);
+  const config = getRouteConfig(configPath);
+  const finalAccess = access || config?.allow;
+  
+  return {
+    ...(index ? { index: true } : { path }),
+    element: element ? <Suspense fallback={<LoadingSpinner />}>{element}</Suspense> : element,
+    handle: { access: finalAccess, ...meta },
+    ...(children && { children })
+  };
+};
 
 // Router configuration
-// Router configuration
-const routes = [
+export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Root />,
+    path: '/',
+    element: <Root />, // Layout component - NO createRoute wrapper
     children: [
       {
-        path: "/",
-        element: <Layout />,
+        path: '/',
+        element: <Layout />, // Layout component - NO createRoute wrapper
         children: [
-          {
-            path: "",
+          // Public routes with Layout
+          createRoute({
             index: true,
-            element: withSuspense(HomePage)
-          },
-          {
-            path: "browse",
-            element: withSuspense(BrowsePropertiesPage)
-          },
-          {
-            path: "property/:id",
-            element: withSuspense(PropertyDetailPage)
-          },
-          {
-            path: "owner-dashboard",
-            element: withSuspense(OwnerDashboardPage)
-          },
-          {
-            path: "company-dashboard",
-            element: withSuspense(CompanyDashboardPage)
-          },
-          {
-            path: "create-listing",
-            element: withSuspense(CreateListingPage)
-          },
-          {
-            path: "messages",
-            element: withSuspense(MessagesPage)
-          },
-          {
-            path: "how-it-works",
-            element: withSuspense(HowItWorksPage)
-          },
-          {
-            path: "*",
-            element: withSuspense(NotFound)
-          }
+            element: <HomePage />,
+            title: 'Home'
+          }),
+          createRoute({
+            path: 'browse',
+            element: <BrowsePropertiesPage />,
+            title: 'Browse Properties'
+          }),
+          createRoute({
+            path: 'property/:id',
+            element: <PropertyDetailPage />,
+            title: 'Property Details'
+          }),
+          createRoute({
+            path: 'how-it-works',
+            element: <HowItWorksPage />,
+            title: 'How It Works'
+          }),
+          
+          // Protected routes with Layout
+          createRoute({
+            path: 'owner-dashboard',
+            element: <OwnerDashboardPage />,
+            title: 'Owner Dashboard'
+          }),
+          createRoute({
+            path: 'company-dashboard',
+            element: <CompanyDashboardPage />,
+            title: 'Company Dashboard'
+          }),
+          createRoute({
+            path: 'create-listing',
+            element: <CreateListingPage />,
+            title: 'Create Listing'
+          }),
+          createRoute({
+            path: 'messages',
+            element: <MessagesPage />,
+            title: 'Messages'
+          }),
+          
+          // 404 route
+          createRoute({
+            path: '*',
+            element: <NotFound />,
+            title: 'Page Not Found'
+          })
         ]
       },
+      
       // Authentication routes (outside Layout)
-      {
-        path: "login",
-        element: withSuspense(Login)
-      },
-      {
-        path: "signup",
-        element: withSuspense(Signup)
-      },
-      {
-        path: "callback",
-        element: withSuspense(Callback)
-      },
-      {
-        path: "error",
-        element: withSuspense(ErrorPage)
-      },
-      {
-        path: "reset-password/:appId/:fields",
-        element: withSuspense(ResetPassword)
-      },
-      {
-        path: "prompt-password/:appId/:emailAddress/:provider",
-        element: withSuspense(PromptPassword)
-      }
+      createRoute({
+        path: 'login',
+        element: <Login />,
+        title: 'Login'
+      }),
+      createRoute({
+        path: 'signup',
+        element: <Signup />,
+        title: 'Sign Up'
+      }),
+      createRoute({
+        path: 'callback',
+        element: <Callback />,
+        title: 'Authentication Callback'
+      }),
+      createRoute({
+        path: 'error',
+        element: <ErrorPage />,
+        title: 'Error'
+      }),
+      createRoute({
+        path: 'reset-password/:appId/:fields',
+        element: <ResetPassword />,
+        title: 'Reset Password'
+      }),
+      createRoute({
+        path: 'prompt-password/:appId/:emailAddress/:provider',
+        element: <PromptPassword />,
+        title: 'Prompt Password'
+      })
     ]
   }
-];
-
-export const router = createBrowserRouter(routes);
+]);
