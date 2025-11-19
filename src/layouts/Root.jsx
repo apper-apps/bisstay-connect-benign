@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, createContext, useContext } from "react";
-import { setUser, clearUser, setInitialized } from "@/store/userSlice";
+import { setUser, clearUser, setInitialized, setUserRole, setUserContext } from "@/store/userSlice";
 import { getRouteConfig, verifyRouteAccess } from "@/router/route.utils";
 import { getApperClient } from "@/services/apperClient";
 
@@ -92,8 +92,18 @@ export default function Root() {
   };
 
   const handleAuthSuccess = (user) => {
-    if (user) {
+if (user) {
       dispatch(setUser(user));
+      
+      // Extract user role and context information
+      const userRole = user.accounts?.[0]?.roles?.includes('property_owner') ? 'owner' : 'company';
+      const ownerId = user.userId || user.id;
+      const companyId = user.accounts?.[0]?.companyId || user.companyId;
+      const permissions = user.accounts?.[0]?.permissions || [];
+      
+      dispatch(setUserRole(userRole));
+      dispatch(setUserContext({ ownerId, companyId, permissions }));
+      
       handleNavigation();
     } else {
       dispatch(clearUser());

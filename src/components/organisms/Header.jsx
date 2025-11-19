@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ApperIcon from '@/components/ApperIcon';
-import RoleSelector from '@/components/molecules/RoleSelector';
-import LanguageSelector from '@/components/molecules/LanguageSelector';
-import { useAuth } from '@/layouts/Root';
-import { useLanguage } from '@/contexts/LanguageContext';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUserRole } from "@/store/userSlice";
+import ApperIcon from "@/components/ApperIcon";
+import LanguageSelector from "@/components/molecules/LanguageSelector";
+import RoleSelector from "@/components/molecules/RoleSelector";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/layouts/Root";
 
 const LogoutButton = () => {
   const { user } = useSelector(state => state.user);
@@ -27,8 +28,14 @@ const LogoutButton = () => {
 const Header = ({ mobileMenuOpen, setMobileMenuOpen }) => {
 const location = useLocation();
   const navigate = useNavigate();
-  const [currentRole, setCurrentRole] = useState('company');
+  const userRole = useSelector(selectUserRole);
+  const [currentRole, setCurrentRole] = useState(userRole || 'company');
   const { t } = useLanguage();
+  
+  // Update local state when Redux role changes
+  useEffect(() => {
+    setCurrentRole(userRole || 'company');
+  }, [userRole]);
 
   const navItems = [
     { name: t('nav.browse'), path: '/browse', icon: 'Search' },
@@ -37,8 +44,9 @@ const location = useLocation();
     { name: t('nav.howItWorks'), path: '/how-it-works', icon: 'HelpCircle' },
   ];
 
-  const handleRoleChange = (role) => {
+const handleRoleChange = (role) => {
     setCurrentRole(role);
+    // Navigation handled by RoleSelector Redux dispatch
     if (location.pathname.includes('dashboard')) {
       navigate(role === 'owner' ? '/owner-dashboard' : '/company-dashboard');
     }
@@ -79,7 +87,7 @@ return (
 
           {/* Role Selector & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <RoleSelector currentRole={currentRole} onRoleChange={handleRoleChange} />
+<RoleSelector currentRole={userRole} onRoleChange={handleRoleChange} />
             <Link
               to="/create-listing"
               className="btn-primary flex items-center space-x-2"

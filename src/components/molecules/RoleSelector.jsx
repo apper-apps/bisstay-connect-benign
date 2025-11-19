@@ -1,9 +1,27 @@
 import { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserRole, selectUser, selectUserRole } from '@/store/userSlice';
 import ApperIcon from '@/components/ApperIcon';
 
 const RoleSelector = ({ currentRole, onRoleChange }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const userRole = useSelector(selectUserRole);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  
+  // Determine available roles based on user data
+  const availableRoles = [
+    { id: 'company', label: 'Företag', description: 'Hantera bokningar' },
+  ];
+  
+  // Add owner role if user has properties or is property owner
+  if (user?.accounts?.[0]?.roles?.includes('property_owner') || user?.ownerId) {
+    availableRoles.unshift({ id: 'owner', label: 'Fastighetsägare', description: 'Hantera fastigheter' });
+  }
+  
+  // Use Redux role if no currentRole provided
+  const effectiveRole = currentRole || userRole;
 
 const roles = [
     { id: 'company', name: 'Byggföretag', icon: 'Building2' },
@@ -40,7 +58,10 @@ const roles = [
             <button
               key={role.id}
               onClick={() => {
-                onRoleChange(role.id);
+// Update Redux state
+                dispatch(setUserRole(role.id));
+                // Call parent handler if provided
+                onRoleChange?.(role.id);
                 setIsOpen(false);
               }}
               className={`w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
