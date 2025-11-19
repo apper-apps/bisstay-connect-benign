@@ -95,11 +95,34 @@ export default function Root() {
 if (user) {
       dispatch(setUser(user));
       
-      // Extract user role and context information
+// Extract user role and context information with debugging
+      console.log('Full user object for debugging:', user);
+      
       const userRole = user.accounts?.[0]?.roles?.includes('property_owner') ? 'owner' : 'company';
-      const ownerId = user.userId || user.id;
-      const companyId = user.accounts?.[0]?.companyId || user.companyId;
+      const ownerId = user.userId || user.id || user.accounts?.[0]?.userId;
+      const companyId = user.accounts?.[0]?.companyId || user.companyId || user.accounts?.[0]?.id;
       const permissions = user.accounts?.[0]?.permissions || [];
+      
+      // Debug logging for RLS troubleshooting
+      console.log('Extracted user context:', {
+        userRole,
+        ownerId,
+        companyId,
+        permissions,
+        userObject: {
+          userId: user.userId,
+          id: user.id,
+          accounts: user.accounts
+        }
+      });
+      
+      if (!ownerId && userRole === 'owner') {
+        console.warn('Owner role detected but no ownerId found in user object');
+      }
+      
+      if (!companyId && userRole === 'company') {
+        console.warn('Company role detected but no companyId found in user object');
+      }
       
       dispatch(setUserRole(userRole));
       dispatch(setUserContext({ ownerId, companyId, permissions }));
